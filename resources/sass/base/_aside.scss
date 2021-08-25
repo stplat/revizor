@@ -1,0 +1,35 @@
+/* ПЕРЕМЕННЫЕ */
+$color-bg: #3c4b64;
+$color-bg-light: rgba(0, 0, 21, .2);
+
+/* БЛОК сайдбара */
+.aside {
+  background: $color-bg;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ЭЛЕМЕНТ с логотипом */
+.aside__logo {
+  text-align: center;
+  background: $color-bg-light;
+  flex-grow: 0;
+
+  a {
+    display: block;
+    height: 104px;
+    padding: 15px 0;
+  }
+
+  img {
+    height: 100%;
+  }
+}
+
+/* ЭЛЕМЕНТ с меню */
+.aside__menu {
+  flex: 1 0 auto;
+}

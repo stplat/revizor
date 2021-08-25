@@ -1,0 +1,79 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 14px;
+$border-radius: 4px;
+
+$color-grey-bg: #d1ecf1;
+$color-grey-text: #0c5460;
+$color-grey-border: #bee5eb;
+
+$color-green-bg: #d4edda;
+$color-green-text: #155724;
+$color-green-border: #c3e6cb;
+
+$color-red-bg: #f8d7da;
+$color-red-text: #721c24;
+$color-red-border: #f5c6cb;
+
+$color-orange-bg: #fff3cd;
+$color-orange-text: #795800;
+$color-orange-border: #f2e1ad;
+
+/* БЛОК оповещения */
+.alert {
+  position: relative;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: $border-radius;
+  margin: 0 0 20px;
+  font-size: $font-size;
+}
+
+/* МОДИФИКАТОР оповещения - красный */
+.alert--success {
+  color: $color-green-text;
+  background-color: $color-green-bg;
+  border-color: $color-green-border;
+}
+
+/* МОДИФИКАТОР оповещения - оранжевый */
+.alert--orange {
+  color: $color-orange-text;
+  background-color: $color-orange-bg;
+  border-color: $color-orange-border;
+}
+
+/* МОДИФИКАТОР оповещения - красный */
+.alert--danger {
+  color: $color-red-text;
+  background-color: $color-red-bg;
+  border-color: $color-red-border;
+}
+
+/* МОДИФИКАТОР оповещения - красный */
+.alert--info {
+  color: $color-grey-text;
+  background-color: $color-grey-bg;
+  border-color: $color-grey-border;
+}
+
+/* АНИМАЦИЯ для vue */
+.list-enter-active,
+.list-leave-active,
+.alert-list-enter-active,
+.alert-list-leave-active {
+  transition: all 0.1s;
+}
+
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.alert-list-enter,
+.alert-list-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}

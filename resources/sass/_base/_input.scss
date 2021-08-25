@@ -1,0 +1,51 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 14px;
+$height-block: 38px;
+$color-border-control: #5a6268;
+$color-border-control-blue: #007bff;
+$color-indeterminate-bg: #80888e;
+
+$active-color-text: #495057;
+$active-color-border: #a1cbef;
+
+/* БЛОК базовых полей ввода */
+.input {
+  display: block;
+  width: 100%;
+  height: $height-block;
+  padding: 5px 10px;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: 1;
+  color: $color-text-base;
+  background-color: #ffffff;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus,
+  &.is-active {
+    color: $active-color-text;
+    background-color: #ffffff;
+    border-color: $active-color-border;
+    outline: 0;
+    box-shadow: $shadow-box-blue;
+  }
+
+  &.is-invalid {
+    border-color: $color-border-red;
+    padding-right: 45px;
+    position: relative;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545'%3E%3Ccircle cx='6' cy='6' r='4.5'/%3E%3Cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3E%3Ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+
+    &:focus {
+      border-color: $color-border-red;
+      box-shadow: $shadow-box-red;
+    }
+  }
+}

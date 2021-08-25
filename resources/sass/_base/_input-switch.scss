@@ -1,0 +1,110 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 14px;
+
+/* БЛОК переключателя */
+.input-switch {
+  display: flex;
+  align-items: center;
+}
+
+/* ЭЛЕМЕНТ слайдера для переключателя */
+.input-switch__slider {
+  display: block;
+  width: 48px;
+  height: 26px;
+  background: #ffffff;
+  border-radius: $border-radius;
+  position: relative;
+  border: 1px solid $color-border;
+  cursor: pointer;
+  flex-shrink: 1;
+  transition: border-color 0.2s, background-color 0.2s;
+
+  &::before {
+    content: "\E802";
+    font-family: $font-icons-base;
+    color: $color-border;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    position: absolute;
+    border-radius: 2px;
+    border: 1px solid $color-border;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 24px;
+    transition: right 0.2s;
+  }
+
+  input:checked + & {
+    border-color: $color-border-blue;
+    background-color: $color-bg-blue;
+
+    &:before {
+      content: "\E807";
+      color: #ffffff;
+      left: 7px;
+      right: auto;
+      font-size: 10px;
+    }
+
+    &::after {
+      right: 2px;
+      border-color: $color-border-blue;
+    }
+  }
+
+  input:focus + & {
+    border-color: $active-color-border;
+    outline: 0;
+    box-shadow: $shadow-box-blue;
+  }
+
+  input:disabled + & {
+    cursor: default;
+    opacity: 0.5;
+  }
+}
+
+/* ЭЛЕМЕНТ метки для ввода */
+.input-switch__label {
+  font-size: $font-size;
+  padding-left: 10px;
+  cursor: pointer;
+
+  input:disabled + label + & {
+    cursor: default;
+    opacity: 0.5;
+  }
+
+  /* Для многократного выбора в выпадающем списке */
+  .dropdown__dropdown & {
+    padding: 2px 45px 2px 15px;
+  }
+}
+
+/* МОДИФИКАТОР для метки - тэг в конце строки */
+.input-switch__label--tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ЭЛЕМЕНТ тэга в конце строки */
+.input-switch__tag {
+  white-space: nowrap;
+  font-size: $font-size;
+}

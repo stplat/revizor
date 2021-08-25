@@ -1,0 +1,122 @@
+@import "variables";
+
+/* ПЕРЕМЕННЫЕ */
+$font-size: 14px;
+$border-radius: 4px;
+
+$action-color-bg-grey: #e5e6e7;
+
+/* БЛОК с настройками пользователя в шапке */
+.user {
+  height: 100%;
+  position: relative;
+  font-size: $font-size;
+
+  hr {
+    margin: 0;
+    color: transparent;
+
+    &:before {
+      content: "";
+      display: block;
+      height: 1px;
+      background: $color-border;
+      width: 100%;
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ с кнопкой выпадашки */
+.user__btn {
+  height: 100%;
+
+  label {
+    display: block;
+    height: 100%;
+    cursor: pointer;
+
+    img {
+      height: 100%;
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ с выпадашкой */
+.user__dropdown {
+  width: 180px;
+  background: #ffffff;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 2px);
+  box-shadow: $shadow-box;
+  border-radius: $border-radius;
+  border: 1px solid $color-border;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* БЛОК с выпадашкой */
+.user-dropdown {
+}
+
+/* ЭЛЕМЕНТ заголовка в выпадашке */
+.user-dropdown__title {
+  background: $color-bg-grey;
+  color: $color-text-base;
+  padding: 10px 15px;
+  font-weight: 600;
+}
+
+/* ЭЛЕМЕНТ списка в выпадашке */
+.user-dropdown__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ЭЛЕМЕНТ ссылки в выпадашке */
+.user-dropdown__link {
+  padding: 12px 15px;
+  color: $color-text-base;
+  text-decoration: none;
+  display: block;
+
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    font-family: $font-icons-base;
+    margin: 0 7px 0 0;
+  }
+
+  .no-touchevents &:hover {
+    background: $action-color-bg-grey;
+  }
+}
+
+/* МОДИФИКАТОР ссылки в выпадашке - настройки */
+.user-dropdown__link--setting {
+  &:before {
+    content: "\E806";
+  }
+}
+
+/* МОДИФИКАТОР ссылки в выпадашке - выход */
+.user-dropdown__link--logout {
+  &:before {
+    content: "\E808";
+  }
+}
+
+/* АНИМАЦИЯ ДЛЯ VUE */
+.slide-fade-enter-active {
+  transition: all 0.1s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.1s;
+}
+.slide-fade-enter, .slide-fade-leave-to
+  /* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateY(10px);
+  opacity: 0;
+}

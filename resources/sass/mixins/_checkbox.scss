@@ -1,0 +1,26 @@
+/* checkbox в таблицах */
+.c-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #007bff;
+    border-radius: 1px;
+    margin: 0;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+  }
+
+  input {
+    box-sizing: border-box;
+    padding: 0;
+  }
+}

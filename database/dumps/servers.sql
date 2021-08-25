@@ -1,0 +1,3 @@
+INSERT INTO public.servers (server_id, server_type_id, online, password, server_ip, token_id, last_response) VALUES (12345, 1, false, '179ad45c6ce2cb97cf1029e212046e81', '123.44.77.88', 3133800120852342, '2020-08-03 22:20:22.366964');
+INSERT INTO public.servers (server_id, server_type_id, online, password, server_ip, token_id, last_response) VALUES (98765, 3, false, '179ad45c6ce2cb97cf1029e212046e81', '123.44.11.22', 1399893199471596, '2020-08-03 22:35:51.446439');
+INSERT INTO public.servers (server_id, server_type_id, online, password, server_ip, token_id, last_response) VALUES (54212, 2, false, '179ad45c6ce2cb97cf1029e212046e81', '123.44.99.10', 1128287647957104, '2020-08-18 11:44:17.524028');

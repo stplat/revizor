@@ -1,0 +1,1 @@
+INSERT INTO public.violation_decree (check_id, decree) VALUES (1, 'п. 12 ст. 2 Постановление ЦИК РФ "О чём-нибудь" №12 от 21.03.2020 г.');

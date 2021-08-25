@@ -1,0 +1,70 @@
+@import "_base/variables";
+
+/* БЛОК с пагинацией */
+.paginate {
+  margin-top: 15px;
+}
+
+/* ЭЛЕМЕНТ списка кнопок пагинации */
+.paginate__list {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* БЛОК кнопки пагинации */
+.paginate-btn {
+  font-size: 15px;
+  padding: 10px 15px;
+  border-radius: $border-radius;
+  margin: 0 2px;
+  box-shadow: $shadow-box;
+  background-color: #ffffff;
+  outline: none;
+  font-family: $font-family-base;
+  color: $color-text-base;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+
+  .no-touchevents &:hover {
+    // background-color: $color-bg-input-button;
+  }
+
+  &:not(:disabled):not(.disabled):active {
+    box-shadow: $shadow-box-inset;
+  }
+}
+
+/* МОДИФИКАТОР для кнопки - зеленый */
+.paginate-btn--green {
+  background-color: $color-bg-green;
+  color: #ffffff;
+}
+
+/* МОДИФИКАТОР для кнопки - голубой */
+.paginate-btn--blue {
+  background-color: $color-bg-blue;
+  color: #ffffff;
+}
+
+/* МОДИФИКАТОР для кнопки - темно серый */
+.paginate-btn--grey {
+  background-color: $color-bg-dark-grey;
+  color: #ffffff;
+}
+
+/* МОДИФИКАТОР для кнопки - темно серый */
+.paginate-btn--red {
+  background-color: $color-bg-red;
+  color: #ffffff;
+}
+
+/* ЭЛЕМЕНТ подписи под кнопкам количество */
+.paginate__info {
+  font-size: 15px;
+  color: $color-text-light;
+  text-align: center;
+  margin-top: 15px;
+}

@@ -1,0 +1,1 @@
+INSERT INTO public.videos_auth_types (auth_type_id, type_name) VALUES (1, 'Проверим WebCam');

@@ -1,0 +1,142 @@
+@import "variables";
+
+/* БЛОКИ общей разметки */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[v-cloak] > * {
+  display: none;
+}
+
+body {
+  color: $color-text-base;
+  background-color: $color-bg-base;
+  font-family: $font-family-base;
+  outline: none;
+  overflow: auto;
+}
+
+a,
+button {
+  outline: none;
+  text-decoration: none;
+}
+
+a.link {
+  color: $color-text-blue;
+  border-bottom: 1px solid $color-text-blue;
+  transition: border-color 0.08s;
+  font-size: 15px;
+
+  &:hover {
+    text-decoration: none;
+    color: $color-text-blue;
+    border-color: transparent;
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    text-decoration: none;
+    border-color: transparent;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-weight: 400;
+  color: $color-text-base;
+}
+
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+/* БЛОК для отсутпов padding-bottom */
+@for $i from 0 through 5 {
+  .pb-#{$i} {
+    padding-bottom: 5px * $i !important;
+  }
+}
+
+/* БЛОК для отсутпов margin-right */
+@for $i from 0 through 5 {
+  .mr-#{$i} {
+    margin-right: 5px * $i !important;
+  }
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+/* БЛОК для отсутпов margin-left */
+@for $i from 0 through 5 {
+  .ml-#{$i} {
+    margin-left: 5px * $i !important;
+  }
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+/* БЛОК для отсутпов margin-top */
+@for $i from 0 through 5 {
+  .mt-#{$i} {
+    margin-top: 5px * $i !important;
+  }
+}
+
+/* БЛОК для отсутпов margin-left-right */
+@for $i from 1 through 5 {
+  .mx-#{$i} {
+    margin-left: 5px * $i !important;
+    margin-right: 5px * $i !important;
+  }
+}
+
+/* БЛОК для отсутпов margin-top-bottom */
+@for $i from 1 through 5 {
+  .my-#{$i} {
+    margin-top: 5px * $i !important;
+    margin-bottom: 5px * $i !important;
+  }
+}
+
+/* БЛОК для отсутпов margin-bottom */
+@for $i from 1 through 5 {
+  .mb-#{$i} {
+    margin-bottom: 5px * $i !important;
+  }
+}
+
+/* БЛОК без переноса текста */
+.space-no-wrap {
+  white-space: nowrap;
+}
+
+/* СТИЛИ для FLEX-блоков */
+.d-flex {
+  display: flex;
+}

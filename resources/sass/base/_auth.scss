@@ -1,0 +1,40 @@
+@import "variables";
+
+/* БЛОК авторизации */
+.auth {
+  display: flex;
+  justify-content: center;
+  margin-top: 150px;
+}
+
+/* ЭЛЕМЕНТ подложки */
+.auth__wrap {
+  display: inline-flex;
+  align-items: flex-end;
+  padding: 30px;
+}
+
+/* ЭЛЕМЕНТ логотипа */
+.auth__logo {
+  padding-right: 70px;
+
+  img {
+    width: 100%;
+  }
+}
+
+/* ЭЛЕМЕНТ подложки */
+.auth__entry {
+  width: 300px;
+  padding: 20px 30px;
+  box-shadow: $shadow-box;
+  border-radius: $border-radius;
+  background: #FFFFFF;
+}
+
+/* ЭЛЕМЕНТ с кнопками контроля */
+.auth__control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

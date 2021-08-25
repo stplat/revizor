@@ -1,0 +1,4 @@
+﻿region_number;station_number;voters_turnout;voters_voted_at_station;voters_voted_early;voters_voted_outside_station;ballots_in_ballot_boxes_after_election;ballots_valid;ballots_invalid;candidates_votes_json
+28;319;1052;790;260;1;1050;1051;1;"{""Иванов Иван Иванович"": 351, ""Петров Иван Иванович"": 342, ""Семёнов Иван Иванович"": 450}"
+61;1448;721;700;97;0;720;720;1;"{""Иванов Иван Иванович"": 210, ""Петров Иван Иванович"": 620, ""Семёнов Иван Иванович"": 3}"
+63;3920;699;699;145;0;699;699;0;"{""Иванов Иван Иванович"": 26, ""Петров Иван Иванович"": 46, ""Семёнов Иван Иванович"": 571}"

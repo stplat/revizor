@@ -1,0 +1,134 @@
+@import "base/variables";
+
+/* БЛОК со значками типов нарушений с загнутым листом */
+.sign {
+    position: relative;
+    width: 23px;
+    height: 30px;
+
+    &:before {
+        content: '\E836';
+        font-family: $font-icons;
+        font-size: 30px;
+        line-height: 1;
+        top: 0;
+        right: 0;
+        position: absolute;
+        color: $color-bg-blue;
+    }
+
+    &:after {
+        font-family: $font-icons;
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 1;
+    }
+}
+
+/* МОДИФИКАТОР значка - галочка */
+.sign--right {
+    &:after {
+        content: '\E815';
+    }
+}
+
+/* МОДИФИКАТОР значка - скрепка */
+.sign--clip {
+    &:after {
+        content: '\E839';
+    }
+}
+
+/* МОДИФИКАТОР значка - самолет */
+.sign--plane {
+    &:after {
+        content: '\E830';
+    }
+}
+
+/* МОДИФИКАТОР значка - принтер */
+.sign--print {
+    &:after {
+        content: '\E81D';
+    }
+}
+
+/* МОДИФИКАТОР значка - ключ */
+.sign--wrench {
+    &:after {
+        content: '\E82E';
+    }
+}
+
+/* МОДИФИКАТОР значка - сердце */
+.sign--heart {
+    &:after {
+        content: '\E82D';
+    }
+}
+
+/* БЛОК со значками статусов нарушений с цветами */
+.sign-flag {
+    position: relative;
+    width: 30px;
+    height: 39px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        border: 15px solid;
+        border-top: 30px solid;
+        border-bottom: 9px solid;
+        border-color: $color-bg-orange;
+        border-bottom-color: transparent !important;
+        border-radius: 4px 4px 0 0;
+    }
+
+    &:after {
+        content: '\E81C';
+        font-family: $font-icons;
+        color: #FFFFFF;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+    }
+}
+
+/* МОДИФИКАТОР со значком - красный */
+.sign-flag--red {
+    &:before {
+        border-color: $color-bg-red;
+    }
+}
+
+/* МОДИФИКАТОР со значком - голубой */
+.sign-flag--blue {
+    &:before {
+        border-color: $color-bg-blue;
+    }
+}
+
+/* МОДИФИКАТОР со значком - box */
+.sign-flag--box {
+    &:after {
+        content: '\E83D';
+    }
+}
+
+/* МОДИФИКАТОР со значком - vote */
+.sign-flag--vote {
+    &:after {
+        content: '\E812';
+    }
+}
+

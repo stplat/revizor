@@ -1,0 +1,183 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 14px;
+$color-border-control: #5a6268;
+$color-border-control-blue: #007bff;
+$color-indeterminate-bg: #80888e;
+
+$width-checkbox: 18px;
+
+/* БЛОК с одиночной checkbox-кнопкой */
+.input-checkbox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: 1;
+  color: $color-text-base;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* ЭЛЕМЕНТ с полем ввода */
+.input-checkbox__input {
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid $color-border-control;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1px;
+  background: #ffffff;
+
+  &:before {
+    content: "\E807";
+    font-family: $font-icons-base;
+    line-height: 1;
+    font-size: 11px;
+    position: absolute;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &:after {
+    content: "";
+    display: none;
+    background: $color-indeterminate-bg;
+    width: 10px;
+    height: 10px;
+    border-radius: 1px;
+  }
+
+  &:not(:disabled):checked:before {
+    display: inline-flex;
+  }
+
+  &:not(:disabled):not(.input-control__input--checkbox):indeterminate:after {
+    display: block;
+  }
+
+  &:disabled,
+  &:disabled + label {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+/* ЭЛЕМЕНТ метки для ввода */
+.input-checkbox__label {
+  font-size: $font-size;
+  padding-left: 10px;
+  cursor: pointer;
+
+  /* Для многократного выбора в выпадающем списке */
+  .dropdown__dropdown & {
+    padding: 2px 45px 2px 15px;
+  }
+}
+
+/* МОДИФИКАТОР для метки - тэг в конце строки */
+.input-checkbox__label--tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ЭЛЕМЕНТ тэга в конце строки */
+.input-checkbox__tag {
+  white-space: nowrap;
+  font-size: $font-size;
+}
+
+/* БЛОК со списком одиночных checkbox-кнопок */
+.input-checkbox-multi {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  & > li {
+    margin: 10px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .dropdown__dropdown > & {
+    padding: 10px 0 10px 15px;
+  }
+}
+
+/* БЛОК с многократным выбором чекбоксов аля excel */
+.input-checkbox-multi-xls {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+
+  .dropdown__dropdown > & {
+    padding: 15px;
+  }
+}
+
+/* ЭЛЕМЕНТ с чекбоксом выбора всех параметров */
+.input-checkbox-multi-xls__all {
+  position: relative;
+}
+
+/* ЭЛЕМЕНТ с чекбоском */
+.input-checkbox-multi-xls__item {
+  position: relative;
+
+  .input-checkbox-multi-xls__all ~ & {
+    padding: 5px 0 5px $width-checkbox * 1.5;
+
+    &:before {
+      content: "";
+      display: block;
+      height: 100%;
+      width: 1px;
+      background: $color-border;
+      top: 0;
+      position: absolute;
+      left: 9px;
+    }
+
+    &:after {
+      content: "";
+      display: block;
+      height: 1px;
+      width: $width-checkbox;
+      background: $color-border;
+      top: 50%;
+      position: absolute;
+      left: $width-checkbox / 2;
+    }
+
+    &:nth-child(2) {
+      padding-top: 10px;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+
+      &:before {
+        height: 50%;
+      }
+    }
+  }
+}

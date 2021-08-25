@@ -1,0 +1,10 @@
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (1, 'Новое событие');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (2, 'Не нарушение');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (3, 'Новое нарушение');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (4, 'Создан протокол');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (5, 'Получен ответ');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (6, 'Повторное нарушение');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (7, 'Нарушение исправлено');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (8, 'Повторное нарушение исправлено');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (9, 'Нарушение не исправлено');
+INSERT INTO public.event_statuses (status_id, status_name) VALUES (10, 'Повторное нарушение не исправлено');

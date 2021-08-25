@@ -1,0 +1,2 @@
+INSERT INTO public.cam_boxes (uik_id, cam_id, boxes_flag, boxes_num, last_update_datetime) VALUES (2, '09626109-864a-aaaa-aaaa-bcad28d0c9ae-sub', true, 2, '2020-04-21 14:02:26.277006');
+INSERT INTO public.cam_boxes (uik_id, cam_id, boxes_flag, boxes_num, last_update_datetime) VALUES (1, '09626109-864a-aaaa-aaaa-bcad28d0c9ae-sub', true, 2, '2020-04-21 14:02:26.277006');

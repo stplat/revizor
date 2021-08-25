@@ -1,0 +1,1 @@
+INSERT INTO public.downloading_videos_auth (check_id, auth_needed, auth_type_id, auth_link, auth_login, auth_password) VALUES (1, true, 1, 'https://google.com', 'admin', 'password');

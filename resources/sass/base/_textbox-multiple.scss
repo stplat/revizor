@@ -1,0 +1,72 @@
+@import "variables";
+
+/* ПЕРЕМЕННЫЕ */
+
+/* БЛОК с множественным текстбоксом */
+.multiple-textbox {
+}
+
+/* ЭЛЕМЕНТ с полем для ввода */
+.multiple-textbox__input {
+  display: flex;
+  margin: 0 0 5px;
+
+  input {
+    border-right: none;
+    border-radius: $border-radius 0 0 $border-radius;
+  }
+}
+
+/* ЭЛЕМЕНТ кнопки */
+.multiple-textbox__btn {
+  border: 1px solid $color-border;
+  border-radius: 0 $border-radius $border-radius 0;
+  cursor: pointer;
+  width: 28px;
+
+    &:before {
+      content: '\E80F';
+      font-family: $font-icons-base;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+  &:active {
+    box-shadow: $shadow-box-inset;
+  }
+}
+
+/* МОДИФИКАТОР для кнопки - */
+.multiple-textbox__btn--close {
+  &:before {
+    content: '\E802';
+  }
+}
+
+//.multiple-textbox__btn {
+//  position: absolute;
+//  right: 0;
+//  top: 5px;
+//  width: 28px;
+//  height: 28px;
+//  border: 2px solid $color-border-blue;
+//  border-radius: $border-radius;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  color: $color-border-blue;
+//  cursor: pointer;
+//  transition: background-color 0.08s, color 0.08s;
+//
+//  &:before {
+//    content: '\E80F';
+//    font-family: $font-icons-base;
+//    font-size: 12px;
+//    line-height: 1;
+//  }
+//
+//  .no-touchevents &:hover {
+//    color: #FFFFFF;
+//    background: $color-border-blue;
+//  }
+//}

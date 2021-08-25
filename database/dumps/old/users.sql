@@ -1,0 +1,1 @@
+INSERT INTO public.users (id, user_login, password, creation_date, created_by_user_id, remember_token, role_id) VALUES (1, 'admin', '179ad45c6ce2cb97cf1029e212046e81', '2020-01-01 16:51:47.000000', null, '', 1);

@@ -1,0 +1,34 @@
+/* СТИЛИ ДЛЯ СТРАНИЦЫ С ПРОВЕРКОЙ */
+// Leaflet
+@import "~leaflet.markercluster/dist/MarkerCluster.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
+@import "~leaflet/dist/leaflet.css";
+
+@import "_base/alert";
+@import "_base/card";
+@import "base/comment";
+@import "base/dropdown";
+@import "base/input";
+@import "base/form";
+@import "base/file";
+@import "base/list";
+@import "base/popup";
+@import "base/progress";
+@import "base/pill";
+@import "base/table";
+@import "base/tip";
+@import "base/toggle";
+
+@import "check";
+@import "event";
+@import "filter";
+@import "gallery";
+@import "schema";
+@import "sign";
+@import "uik";
+@import "leaflet";
+@import "indicator";
+@import "in-marker";
+@import "image-editor";
+@import "tip-overflow";
+@import "search-checkbox";

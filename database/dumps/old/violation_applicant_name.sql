@@ -1,0 +1,2 @@
+INSERT INTO public.violation_applicant_name (applicant_id, name, is_organisation) VALUES (1, 'Иванов Иван Иванович', false);
+INSERT INTO public.violation_applicant_name (applicant_id, name, is_organisation) VALUES (2, 'Семёнов Семён Семёнович', false);

@@ -1,0 +1,43 @@
+// Typography
+$font-family-base: "Nunito", sans-serif;
+$font-icons: "Fontello", sans-serif;
+$font-icons-base: "Common Icons", sans-serif;
+$font-size-base: 16px;
+$font-weight-base: 400;
+
+// Colors
+$color-text-base: #3c4b64;
+$color-text-light: rgba(0, 0, 21, 0.5);
+$color-text-blue: #3399ff;
+$color-text-red: #dc3545;
+$color-text-green: #28a745;
+$color-text-orange: #856404;
+
+$color-border: #c5c9cd;
+$color-border-red: #dc3545;
+$color-border-blue: #0057db;
+$color-border-green: #146c43;
+$color-border-orange: #ffeeba;
+$border-radius: 4px;
+
+$color-bg-base: #f8fafc;
+$color-bg-dark-grey: #6c757d;
+$color-bg-grey: #f8f9fa;
+$color-bg-blue: #007bff;
+$color-bg-red: #dc3545;
+$color-bg-green: #28a745;
+$color-bg-orange: #f6993f;
+$color-bg-yellow: #ffed4a;
+$color-bg-input-button: #f0f0f0;
+
+// Shadows
+$shadow-box: 0 1px 1px 0 rgba(60, 75, 100, 0.14),
+  0 2px 1px -1px rgba(60, 75, 100, 0.12), 0 1px 3px 0 rgba(60, 75, 100, 0.2);
+$shadow-box-blue: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+$shadow-box-red: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+
+$shadow-box-inset: inset 1px 1px 5px rgba(0, 0, 0, 0.2);
+
+/* Active/Focus */
+$active-color-text: #495057;
+$active-color-border: #a1cbef;

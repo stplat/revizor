@@ -1,0 +1,96 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 22px;
+
+/* БЛОК карточки на странице */
+.card {
+  box-shadow: $shadow-box;
+  background: #ffffff;
+  margin: 0 0 20px;
+  border-radius: $border-radius;
+  position: relative;
+
+  &:last-child {
+    margin: 0;
+  }
+}
+
+/* МОДИФИКАТОР заголовка - уменьшеный шрифт и толщина */
+.card--small {
+  h3 {
+    font-weight: normal;
+    font-size: 18px;
+  }
+
+  .card__body {
+    padding: 10px 20px;
+  }
+
+  .card-list__item {
+    margin: 10px 0;
+  }
+}
+
+/* ЭЛЕМЕНТ заголовка */
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  background-color: $color-bg-grey;
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  position: relative;
+
+  h3 {
+    margin: 0;
+    padding: 0;
+    color: $color-text-base;
+  }
+}
+
+/* ЭЛЕМЕНТ сноски на полях заголовка (подсказка) */
+.card__header-right {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* ЭЛЕМЕНТ тела */
+.card__body {
+  min-height: 1px;
+  padding: 20px;
+}
+
+/* ЭЛЕМЕНТ флекс-контейнера */
+.card__container {
+  display: flex;
+  margin: -10px;
+  flex-wrap: wrap;
+}
+
+/* ЭЛЕМЕНТ ячейки внутри карточки */
+.card__col {
+  margin: 10px;
+  width: calc(50% - 20px);
+
+  &--35 {
+    width: calc(35% - 20px);
+  }
+
+  &--65 {
+    width: calc(65% - 20px);
+  }
+}
+
+/* ЭЛЕМЕНТ заголовка внутри карточки */
+.card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 18px;
+  border-bottom: 1px solid $color-border;
+  margin: 0 0 10px;
+  padding: 0 0 3px;
+}

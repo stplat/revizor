@@ -1,0 +1,104 @@
+@import "base/variables";
+
+/* ПЕРЕМЕННЫЕ ДЛЯ ВЫПАДАШКИ */
+$schema-color-border-green: $color-bg-green;
+$schema-color-border-orange: $color-bg-orange;
+$schema-box-shadow: 1px 1px 6px rgba(60, 75, 100, 0.2);
+$schema-text-shadow: 1px 1px 9px rgba(60, 75, 100, 0.6);
+
+/* БЛОК со схемой разметки на странице проверки */
+.schema {
+
+}
+
+/* ЭЛЕМЕНТ со строкой разметки */
+.schema__row {
+  display: flex;
+  justify-content: center;
+
+}
+
+/* ЭЛЕМЕНТ со столбцом разметки */
+.schema__col {
+  position: relative;
+  width: calc(100% / 3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* БЛОК с карточкой разметки */
+.schema-box {
+  position: relative;
+  border: 1px solid $schema-color-border-orange;
+  border-radius: 10px;
+  padding: 15px;
+  display: inline-block;
+  box-shadow: $schema-box-shadow;
+}
+
+/* МОДИФИКАТОР для блока с карточкой - оранжевый */
+.schema-box--green {
+  border-color: $schema-color-border-green;
+}
+
+/* ЭЛЕМЕНТ с заголовкой в карточке */
+.schema-box__title {
+  line-height: 1;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 5px;
+}
+
+/* ЭЛЕМЕНТ с текстом в карточке */
+.schema-box__text {
+  line-height: 1;
+  white-space: nowrap;
+  font-size: 16px;
+  margin: 3px 0;
+
+  &:before {
+    content: attr(data-key);
+    margin-right: 5px;
+  }
+}
+
+/* ЭЛЕМЕНТ с прогрес-баром */
+.schema-box__progress {
+  margin: 8px 0 0;
+}
+
+/* ЭЛЕМЕНТ с иконками стрелок */
+.schema__ico {
+  text-shadow: $schema-text-shadow;
+
+  &:before {
+    content: '\E82F';
+    font-family: $font-icons;
+    font-size: 40px;
+  }
+}
+
+/* МОДИФИКАТОР элемент с иконкой - стрелка вправо */
+.schema__ico--arrow {
+  position: absolute;
+  right: 0;
+
+  &:before {
+    content: '\E824';
+  }
+}
+
+/* МОДИФИКАТОР элемента с иконкой - стрелка вправо по левому краю */
+.schema__ico--arrow-left {
+  left: 0;
+  right: auto!important;
+}
+
+/* ЭЛЕМЕНТ с всплывающей подсказкой */
+.schema-box__tip {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  line-height: 1;
+}

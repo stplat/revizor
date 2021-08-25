@@ -1,0 +1,107 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 14px;
+$height-block: 38px;
+$color-border-control: #5a6268;
+$color-border-control-blue: #007bff;
+$color-indeterminate-bg: #80888e;
+
+$active-color-text: #495057;
+$active-color-border: #a1cbef;
+
+/* БЛОК с одиночной radio-кнопкой */
+.input-radio {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: $font-size;
+  font-weight: 400;
+  line-height: 1;
+  color: $color-text-base;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* ЭЛЕМЕНТ поля для ввода */
+.input-radio__input {
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid $color-border-control;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+
+  &:after {
+    content: "";
+    display: none;
+    background: $color-border-control;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+  }
+
+  &:not(:disabled):checked:after {
+    display: block;
+  }
+
+  &:disabled,
+  &:disabled + label {
+    cursor: default;
+    opacity: 0.6;
+  }
+}
+
+/* ЭЛЕМЕНТ метки для ввода */
+.input-radio__label {
+  font-size: $font-size;
+  padding-left: 10px;
+  cursor: pointer;
+
+  /* Для многократного выбора в выпадающем списке */
+  .dropdown__dropdown & {
+    padding: 2px 45px 2px 15px;
+  }
+}
+
+/* МОДИФИКАТОР для метки - тэг в конце строки */
+.input-radio__label--tag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* ЭЛЕМЕНТ тэга в конце строки */
+.input-radio__tag {
+  white-space: nowrap;
+  font-size: $font-size;
+}
+
+/* БЛОК со списком одиночных radio-кнопок */
+.input-radio-multi {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+
+  & > li {
+    margin: 10px 0;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .dropdown__dropdown > & {
+    padding: 15px 0 15px 15px;
+  }
+}

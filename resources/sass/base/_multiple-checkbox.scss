@@ -1,0 +1,55 @@
+@import 'variables';
+
+/* ПЕРЕМЕННЫЕ */
+$width-checkbox: 18px;
+
+/* БЛОК с многократным выбором чекбоксов */
+.multiple-checkbox {
+  list-style-type: none;
+  margin: 0;
+  padding: 15px 0;
+}
+
+/* ЭЛЕМЕНТ с чекбоксом выбора всех параметров */
+.multiple-checkbox__all {
+  position: relative;
+}
+
+/* ЭЛЕМЕНТ с чекбоском */
+.multiple-checkbox__item {
+  position: relative;
+
+  .multiple-checkbox__all ~ & {
+    padding: 5px 0 5px $width-checkbox * 1.5;
+
+    &:before {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 1px;
+      background: $color-border;
+      top: 0;
+      position: absolute;
+      left: 9px;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: $width-checkbox;
+      background: $color-border;
+      top: 50%;
+      position: absolute;
+      left: $width-checkbox / 2;
+    }
+
+    &:nth-child(2) {
+      padding-top: 10px;
+    }
+
+    &:last-child:before {
+      height: 50%;
+    }
+  }
+}

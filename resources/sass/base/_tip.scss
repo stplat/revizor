@@ -1,0 +1,306 @@
+@import "variables";
+
+/* БЛОК всплывающей подсказки */
+.tip {
+  position: relative;
+  display: inline-block;
+  text-align: left;
+
+  /* Для кнопок внутри */
+  .btn {
+    white-space: nowrap;
+  }
+}
+
+/* ЭЛЕМЕНТ кнопки с подсказкой */
+.tip__btn {
+  display: inline-block;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 22px;
+
+  &:before {
+    content: "\E80B";
+    font-family: $font-icons;
+  }
+}
+
+/* МОДИФИКАТОР кнопки с подсказкой - подчеркнутый текст */
+.tip__btn--underline {
+  border-bottom: 1px dashed $color-text-base;
+  padding: 0 0 2px;
+  font-size: inherit;
+
+  &:before {
+    content: none;
+  }
+
+  .no-touchevents &:hover {
+    border-color: transparent;
+  }
+}
+
+/* МОДИФИКАТОР кнопки с подсказкой - знак вопроса внутри */
+.tip__btn--question {
+  &:before {
+    content: "\E811";
+  }
+}
+
+/* МОДИФИКАТОР кнопки с подсказкой - настройки внутри */
+.tip__btn--settings {
+  &:before {
+    content: "\E81F";
+  }
+}
+
+/* ЭЛЕМЕНТ с выпадашкой */
+.tip__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 100;
+  margin-top: 14px;
+  border-radius: $border-radius;
+}
+
+/* МОДИФИКАТОР для выпадашки - с правой стороны от кнопки */
+.tip__dropdown--left {
+  padding: 0;
+  top: 50%;
+  left: calc(100% + 16px);
+  transform: translateY(-50%);
+  margin-top: 0;
+}
+
+/* МОДИФИКАТОР для выпадашки - с левой стороны от кнопки */
+.tip__dropdown--right {
+  padding: 0;
+  top: 50%;
+  right: calc(100% + 16px);
+  left: auto;
+  transform: translateY(-50%);
+  margin-top: 0;
+}
+
+/* БЛОК выпадашки */
+.tip-dropdown {
+  position: relative;
+  z-index: 1;
+  border: 1px solid $color-border;
+  min-width: 200px;
+  background: #ffffff;
+  box-shadow: $shadow-box;
+  border-radius: $border-radius;
+  color: $color-text-base;
+}
+
+/* ЭЛЕМЕНТ с кнопкой закрытия выпадашки */
+.tip-dropdown__close {
+  position: absolute;
+  top: 5px;
+  right: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-base;
+  transition: color 0.05s;
+
+  &:after {
+    content: "\E802";
+    font-family: $font-icons-base;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .no-touchevents &:hover {
+    text-decoration: none;
+    color: #3490dc;
+  }
+}
+
+/* ЭЛЕМЕНТ шапки у выпадашки */
+.tip-dropdown__head {
+  background: $color-bg-grey;
+  font-weight: bold;
+  padding: 12px 50px 12px 15px;
+  font-size: 20px;
+  white-space: nowrap;
+  line-height: 1;
+  border-radius: $border-radius $border-radius 0 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+/* ЭЛЕМЕНТ тела с содержимым */
+.tip-dropdown__body {
+  padding: 10px 15px;
+  min-height: 70px;
+  position: relative;
+}
+
+/* ЭЛЕМЕНТ заголовка внутри подсказки */
+.tip-dropdown__title {
+  border-bottom: 1px solid $color-border;
+  font-size: 16px;
+  white-space: nowrap;
+  padding: 0 0 5px;
+  font-weight: bold;
+}
+
+/* ЭЛЕМЕНТ с содержимым под заголовком */
+.tip-dropdown__content {
+  display: flex;
+  margin: 0 0 15px;
+}
+
+/* ЭЛЕМЕНТ списка внутри подсказки */
+.tip-dropdown__list {
+  list-style-type: none;
+  margin: -7px 0;
+  padding: 0;
+
+  li {
+    margin: 7px 0;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 18px;
+
+    &:before {
+      content: attr(data-key);
+      font-weight: 400;
+      margin-right: 5px;
+      vertical-align: top;
+    }
+  }
+}
+
+/* МОДИФИКАТОР для списка */
+.tip-dropdown__list---light {
+  li:before {
+    font-weight: normal;
+  }
+}
+
+/* БЛОК контейнера для разделения на столбцы */
+.tip-container {
+  display: flex;
+  margin: 0 -20px;
+}
+
+/* ЭЛЕМЕНТ с половиной окна */
+.tip-container__half {
+  width: 50%;
+  margin: 0 20px;
+}
+
+/* ЭЛЕМЕНТ с выпадающим списком (select) */
+.tip-dropdown__select {
+  margin: 5px 0;
+}
+
+/* ЭЛЕМЕНТ с текстом */
+.tip-dropdown__text {
+  white-space: nowrap;
+  font-weight: 300;
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+// /* ЭЛЕМЕНТ с текстовым полем ввода */
+// .tip-dropdown__input {
+
+// }
+
+/* МОДИФИКАТОР для текстового поля ввода - ширина */
+.tip-dropdown__input--120 {
+  width: 100px;
+}
+
+/* ТРЕУГОЛЬНИКИ С РАЗНЫМИ НАПРАВЛЕНИЯМИ УГЛОВ */
+/* БЛОК с треугольником для выпадашки */
+.tip-triangle {
+  position: absolute;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  border-left: 1px solid $color-border;
+  z-index: 2;
+  top: -14px;
+
+  &:after {
+    content: "";
+    background: $color-bg-grey;
+    width: 20px;
+    height: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+}
+
+/* ЭЛЕМЕНТ внутри треуголника */
+.tip-triangle__inner {
+  position: absolute;
+  top: 4px;
+  left: -19px;
+  background: $color-bg-grey;
+  width: 30px;
+  height: 40px;
+  box-shadow: $shadow-box;
+  border: 1px solid $color-border;
+  transform: rotate(45deg);
+}
+
+/* ЭЛЕМЕНТ треугольника с левым углом */
+.tip-triangle-left {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 16px;
+  height: 40px;
+  overflow: hidden;
+  z-index: 2;
+  left: -15px;
+  top: calc(50%);
+  transform: translateY(-50%);
+}
+
+/* ЭЛЕМЕНТ внутри треугольника */
+.tip-triangle-left__inner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $color-border;
+  background: #ffffff;
+  box-shadow: $shadow-box;
+  transform: rotate(45deg);
+  left: 6px;
+}
+
+/* ЭЛЕМЕНТ треугольника с левым углом */
+.tip-triangle-right {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 16px;
+  height: 40px;
+  overflow: hidden;
+  z-index: 2;
+  right: -15px;
+  top: calc(50%);
+  transform: translateY(-50%);
+}
+
+/* ЭЛЕМЕНТ внутри треугольника */
+.tip-triangle-right__inner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid $color-border;
+  background: #ffffff;
+  box-shadow: $shadow-box;
+  transform: rotate(45deg);
+  right: 6px;
+}

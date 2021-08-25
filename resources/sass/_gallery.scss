@@ -1,0 +1,121 @@
+@import "./base/variables";
+
+/* Swiper Slider Styles */
+@import "~swiper/swiper-bundle.min.css";
+
+/* ПЕРЕМЕННЫЕ */
+
+/* БЛОК с фотографиями в модалке */
+// /* ЭЛЕМЕНТ с изображениями */
+// .card__gallery {
+
+// }
+
+// /* БЛОК с галлереей фотографий */
+// .gallery {
+
+// }
+
+/* ЭЛЕМЕНТ с флекс контейнером */
+.gallery__flex {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px -20px;
+}
+
+/* ЭЛЕМЕНТ с ячейкой камеры */
+.gallery__col {
+  margin: 10px 20px;
+}
+
+/* ЭЛЕМЕНТ заголовка - номер камеры */
+.gallery__title {
+  font-weight: bold;
+  font-size: 15px;
+  margin: 0 0 10px;
+  position: relative;
+  display: inline-block;
+  padding-right: 30px;
+
+  &.is-active {
+    &:before {
+      content: "";
+      display: block;
+      border: 1px solid $color-text-green;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      right: -5px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &:after {
+      content: "\E815";
+      font-weight: normal;
+      color: $color-text-green;
+      font-family: $font-icons;
+      margin: 0 0 0 10px;
+      position: absolute;
+      font-size: 10px;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ списка с изображениями */
+.gallery__list {
+  list-style-type: none;
+  display: flex;
+  padding: 0;
+  margin: 0 -5px;
+
+  li {
+    display: block;
+    width: 200px;
+  }
+}
+
+/* ЭЛЕМЕНТ списка */
+.gallery__list-item {
+  width: 100px;
+  font-size: 0;
+  margin: 0 5px;
+  cursor: pointer;
+
+  &:after {
+    content: attr(data-date);
+    display: block;
+    font-size: 12px;
+    text-align: center;
+    margin: 5px 0 0;
+    line-height: 14px;
+  }
+
+  img {
+    width: 92px;
+    font-size: 0;
+
+    &.is-active {
+      border: 2px solid $color-bg-orange;
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ с общей картинкой */
+.gallery__image {
+  text-align: center;
+  font-size: 0;
+  margin: 10px 0 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+.gallery__info {
+  text-align: right;
+}

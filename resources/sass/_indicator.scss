@@ -1,0 +1,22 @@
+@import "_base/variables";
+
+/* НАСТРОЙКИ */
+
+/* БЛОК со индикатором онлайн/оффлайн */
+.indicator {
+  &:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: $color-bg-green;
+    border-radius: 50%;
+  }
+}
+
+/* МОДИФИКАТОР для индикатора - красный */
+.indicator--red {
+  &:before {
+    background: $color-bg-red;
+  }
+}

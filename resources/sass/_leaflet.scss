@@ -1,0 +1,91 @@
+/* Стили для leaflet-карты */
+.leaflet {
+    z-index: 1;
+    height: 100%;
+}
+
+.leaflet-popup {
+    background: transparent !important;
+}
+
+.leaflet-popup-content-wrapper {
+    padding: 0;
+    background: transparent;
+}
+
+.leaflet-popup-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin: 1px 0;
+
+        &:first-child {
+            margin-bottom: 3px;
+        }
+    }
+
+    .popup-list-actions {
+        display: flex;
+        align-items: center;
+
+        a {
+            margin: 6px 6px 0 0;
+        }
+    }
+}
+
+.leaflet-popup-tip-container {
+    margin-left: -22px;
+}
+
+.leaflet-icon-mark {
+    font-size: 90%;
+    white-space: nowrap;
+    color: #ffffff;
+    padding: 3px 4px;
+    border-radius: 0.25rem;
+    top: 5px;
+    left: -5px;
+    position: relative;
+    //box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+
+    &:before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        transform: translate(-50%) rotate(45deg);
+        position: absolute;
+        bottom: -2px;
+        left: calc(50%);
+        background-color: transparent;
+        z-index: -1;
+    }
+
+    &--red,
+    &--red:before {
+        background-color: #dc3545;
+    }
+
+    &--green,
+    &--green:before {
+        color: #28a745;
+        background-color: #28a745;
+    }
+}
+
+.leaflet-tooltip {
+    border-radius: 0.25rem !important;
+    background: white;
+    color: #333;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+    margin: 13px 19px;
+    line-height: 1.4;
+}
+
+.leaflet-popup-content {
+    margin: 0 !important;
+    background: transparent;
+}

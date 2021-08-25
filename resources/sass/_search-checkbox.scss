@@ -1,0 +1,43 @@
+/* ПЕРЕМЕННЫЕ */
+$color-border: #dedede;
+$box-shadow: 1px 1px 6px rgba(60, 75, 100, 0.2);
+
+/* БЛОК поиска с автоподбором чекбоксов */
+.search-checkbox {
+  position: relative;
+}
+
+.search-checkbox__input {
+  input {
+    width: 100%;
+    height: 26px;
+    padding: 3px 5px;
+  }
+}
+
+.search-checkbox__list {
+  padding: 0;
+  position: absolute;
+  background: #FFFFFF;
+  border: 1px solid $color-border;
+  box-shadow: $box-shadow;
+  min-width: 350px;
+  z-index: 999;
+
+  .filter-autocomplete {
+    padding: 10px;
+  }
+
+  .filter-autocomplete__list li:before {
+    height: 26px;
+  }
+}
+
+.search-checkbox-list {
+  list-style-type: none;
+  padding: 0;
+
+  li {
+
+  }
+}

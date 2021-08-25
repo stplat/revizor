@@ -1,0 +1,196 @@
+@import "base/variables";
+
+/* ПЕРЕМЕННЫЕ ВНУТРИ БЛОКА */
+$in-marker-color-grey: #efefef;
+
+/* БЛОК с внутри маркеров на карте */
+.in-marker {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+/* ЭЛЕМЕНТ шапки */
+.in-marker__head {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #EAEAEA;
+  background: $in-marker-color-grey;
+}
+
+/* ЭЛЕМЕНТ заголовка */
+.in-marker__title {
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 0 10px 10px;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+/* ЭЛЕМЕНТ со значками */
+.in-marker__sign {
+  flex-shrink: 1;
+  padding: 0 25px 0 15px;
+}
+
+/* БЛОК со значками */
+.in-marker-sign {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -1px;
+  padding: 0;
+
+  li {
+    div {
+      transform: scale(0.8);
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ тела */
+.in-marker__body {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 0 -10px;
+}
+
+/* ЭЛЕМЕНТы левой и правой колонки */
+.in-marker__left,
+.in-marker__right {
+  margin: 0 10px;
+}
+
+/* ЭЛЕМЕНТ правой колонки */
+.in-marker__right {
+  flex-shrink: 0;
+  width: 30%;
+}
+
+/* БЛОК со списком параметров */
+.in-marker-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 -10px;
+  display: flex;
+}
+
+/* ЭЛЕМЕНТ списка параметров */
+.in-marker-list__item {
+  position: relative;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 0 0 0 15px;
+  margin: 0 10px;
+
+  &:before {
+    content: attr(data-key);
+    display: block;
+    font-weight: normal;
+  }
+
+  &:after {
+    content: '';
+    width: 6px;
+    background: $color-bg-red;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+  }
+
+  &:nth-child(2) {
+    &:after {
+      background: $color-bg-green;
+    }
+  }
+
+  &:nth-child(3) {
+    &:after {
+      background: $color-bg-orange;
+    }
+  }
+}
+
+/* БЛОК с фотографиями */
+.in-marker-image {
+  list-style-type: none;
+  margin: -5px 0;
+  padding: 0;
+}
+
+/* ЭЛЕМЕНТ с фотографией */
+.in-marker-image__item {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 5px 0;
+
+  img {
+    width: 100%;
+  }
+}
+
+/* ЭЛЕМЕНТ с заголовком */
+.in-marker-image__head {
+  background: $in-marker-color-grey;
+  padding: 3px 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* МОДИФИКАТОР для заголовка - галочка */
+.in-marker-image__head--right {
+  &:after {
+    content: '\E81B';
+    font-family: $font-icons;
+    color: $color-bg-green;
+  }
+}
+
+/* БЛОК со значениями */
+.in-marker-box {
+  margin: 10px 0;
+}
+
+/* ЭЛЕМЕНТ с заголовком блока */
+.in-marker-box__head {
+  font-size: 16px;
+  font-weight: bold;
+  border-bottom: 1px solid $in-marker-color-grey;
+}
+
+/* ЭЛЕМЕНТ со строчкой значений */
+.in-marker-box__row {
+  margin: 3px 0;
+  display: flex;
+
+  &:before {
+    content: attr(data-key);
+    font-weight: bold;
+    padding: 0 5px 0 0;
+  }
+}
+
+/* ЭЛЕМЕНТ с подвалом */
+.in-marker__footer {
+  border-top: 1px solid #EAEAEA;
+  padding: 10px 0;
+  margin: 0 10px;
+}
+
+/* БЛОК с полосой прогресса */
+.in-marker-progress {
+  & .progress-bar {
+    font-weight: 600;
+    font-size: 12px;
+  }
+}
+
+/* ЭЛЕМЕНТ с названием полосы прогресса */
+.in-marker-progress__name {
+  margin: 5px 0 2px;
+}
+

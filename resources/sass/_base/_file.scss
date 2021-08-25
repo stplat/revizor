@@ -1,0 +1,80 @@
+@import "variables";
+
+/* ПЕРЕМЕННЫЕ */
+
+/* БЛОК загрузчика файлов */
+.file {
+}
+
+/* ЭЛЕМЕНТ заголовка */
+.file__title {
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  font-size: 15px;
+}
+
+/* ЭЛЕМЕНТ с описанием загружаемых файлов */
+.file__desc {
+  font-size: 14px;
+
+  p {
+    margin: 7px 0;
+  }
+
+  a {
+    color: $color-text-blue;
+    border-bottom: 1px dotted $color-text-blue;
+    transition: border-color 0.05s;
+
+    .no-touchevents &:hover {
+      border-color: transparent;
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ с полем ввода и кнопкой */
+.file__input {
+  display: flex;
+  margin: 20px 0 0;
+
+  label {
+    margin: 0;
+  }
+}
+
+/* ЭЛЕМЕНТ с таблоц загруженного товара */
+.file__board {
+  flex-grow: 1;
+  max-width: 329px;
+  background: #e0e2e4;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  padding: 0 15px;
+  border-radius: $border-radius;
+  margin: 0 5px 0 0;
+
+  p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 !important;
+    line-height: 16px;
+  }
+}
+
+/* ЭЛЕМЕНТ кнопки удаления */
+.file__delete {
+  cursor: pointer;
+  transition: color 0.08s;
+
+  &:before {
+    content: "\E810";
+    font-family: $font-icons-base;
+  }
+
+  .no-touchevents &:hover {
+    color: $color-text-red;
+  }
+}

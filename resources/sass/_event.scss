@@ -1,0 +1,149 @@
+@import "base/variables";
+
+/* ПЕРЕМЕННЫЕ */
+$event-color-border: #dedede;
+$event-box-shadow: 0 1px 1px 0 rgba(60, 75, 100, .14);
+
+/* БЛОК события внутри страницы проверки */
+.event {
+  position: relative;
+}
+
+/* ЭЛЕМЕНТ с плиткой */
+.event__tile {
+}
+
+/* ЭЛЕМЕНТ заголовка */
+.event__title {
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid $event-color-border;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ЭЛЕМЕНТ с подсказкой */
+.event__tip {
+  display: inline-block;
+  line-height: 1;
+}
+
+/* ЭЛЕМЕНТ контейнера с разбивкой на столбцы */
+.event__container {
+  display: flex;
+}
+
+/* ЭЛЕМЕНТ левой колонки внутри контейнера */
+.event__left-col {
+  flex-grow: 1;
+  margin: 0 30px 0 0;
+}
+
+/* ЭЛЕМЕНТ правой колонки внутри контейнера */
+.event__right-col {
+  flex: 0 0 40%;
+  border-left: 1px solid $event-color-border;
+  padding: 0 0 0 30px;
+}
+
+/**/
+.event__table {
+
+}
+
+/**/
+.event__chart {
+
+}
+
+/* ЭЛЕМЕНТ с перключателем */
+.event__toggle {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+
+  &:before {
+    content: attr(data-key);
+    font-size: 18px;
+    width: 230px;
+  }
+}
+
+/* БЛОК плитки со значками */
+.event-tile {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  border: 1px solid $event-color-border;
+  border-radius: 10px;
+  box-shadow: $event-box-shadow;
+}
+
+/* ЭЛЕМЕНТ плитки со значком */
+.event-tile__item {
+  width: 300px;
+  border-right: 1px solid $event-color-border;
+  height: 150px;
+  padding: 20px 30px;
+  position: relative;
+
+  &:after {
+    content: '\E83F';
+    font-family: $font-icons;
+    position: absolute;
+    display: block;
+    font-size: 130px;
+    top: 50%;
+    right: 10px;
+    color: rgba(65, 105, 225, 0.2);
+    line-height: 1;
+    transform: translateY(-50%);
+  }
+
+  &:last-child {
+    border: none;
+  }
+}
+
+/* МОДИФИКАТОР плитки - не хватает видео */
+.event-tile__item--video {
+  &:after {
+    content: '\E823';
+  }
+}
+
+/* МОДИФИКАТОР плитки - расположение ящиков */
+.event-tile__item--area {
+  &:after {
+    content: '\E831';
+  }
+}
+
+/* МОДИФИКАТОР плитки - отклонения */
+.event-tile__item--offset {
+  &:after {
+    content: '\E833';
+  }
+}
+
+/* ЭЛЕМЕНТ с заголовком пликтки */
+.event-tile__title {
+  font-size: 26px;
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+}
+
+/* ЭЛЕМЕНТ со значением пликтки */
+.event-tile__value {
+  font-size: 32px;
+  font-weight: bold;
+  position: absolute;
+  left: 30px;
+  bottom: 20px;
+  z-index: 2;
+  line-height: 1;
+}

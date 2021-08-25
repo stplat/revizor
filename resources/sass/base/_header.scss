@@ -1,0 +1,70 @@
+@import 'variables';
+
+/* ПЕРЕМЕННЫЕ */
+
+/* БЛОК шапки */
+.header {
+  background: #FFFFFF;
+  box-shadow: $shadow-box;
+}
+
+/* ЭЛЕМЕНТ первой линии */
+.header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  padding: 0 20px 0 5px;
+  border-bottom: 1px solid $color-border;
+}
+
+/* ЭЛЕМЕНТ с кнопкой гамбургера */
+.header__btn {
+  flex: 0 0 auto;
+  line-height: 1;
+  font-size: 0;
+}
+
+/* ЭЛЕМЕНТ с логином */
+.header__user {
+  flex: 0 0 auto;
+  height: 40px;
+}
+
+/* ЭЛЕМЕНТ нижней линии */
+.header__bottom {
+  padding: 0 1.5rem;
+  height: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ЭЛЕМЕНТ левой части */
+.header__left {
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* БЛОК с заголовком с возможностью добавления подсказок */
+.header-title {
+  display: flex;
+  align-items: center;
+
+  h1 {
+    margin: 0 15px 0 0;
+  }
+}
+
+/* ЭЛЕМЕНТ с названием, подсказками т.д. */
+.header-title__item {
+  margin: 0 15px 0 0;
+
+  &:first-child {
+    margin: 0 30px 0 0;
+  }
+}
+
+

@@ -1,0 +1,79 @@
+/* ПЕРЕМЕННЫЕ */
+$box-shadow: 1px 1px 6px rgba(60, 75, 100, 0.2);
+$border-color: #737373;
+
+/* БЛОК строки с подсказкой при переполнении */
+.tip-overflow {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* ЭЛЕМЕНТ с самим текстом */
+.tip-overflow__text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-bottom: 1px dashed $border-color;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* МОДИФИКАТОР для текста - без обводки */
+.tip-overflow__text--border-none {
+  border-bottom: none;
+}
+
+/* ЭЛЕМЕНТ всплывашки подсказки */
+.tip-overflow__popup {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 3px 5px;
+  box-shadow: $box-shadow;
+  transition: all 0.1s;
+  top: 0;
+  transform: translateY(calc(-100% - 7px));
+  white-space: nowrap;
+}
+
+.tip-overflow-triangle {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 40px;
+  height: 10px;
+  overflow: hidden;
+  z-index: 2;
+  left: 10px;
+  bottom: -10px;
+
+  &:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #dedede;
+    background: #ffffff;
+    box-shadow: 1px 1px 6px rgba(60, 75, 100, 0.2);
+    transform: rotate(45deg);
+    left: 6px;
+    bottom: 5px;
+  }
+}
+
+/* АНИМАЦИЯ для всплывашки vue */
+.tip-overflow-enter {
+  opacity: 0;
+}
+
+.tip-overflow-leave-active {
+  opacity: 0;
+}
+
+.tip-overflow-enter .tip-overflow__popup,
+.tip-overflow-leave-active .tip-overflow__popup {
+  top: -100px;
+}

@@ -1,0 +1,21 @@
+/* БЛОК с периодом даты */
+.date-period {
+  display: flex;
+  align-items: center;
+}
+
+/* ЭЛЕМЕНТ с колонкой */
+.date-period__col {
+  display: flex;
+  align-items: flex-end;
+}
+
+/* ЭЛЕМЕНТ метки */
+.date-period__label {
+
+}
+
+/* ЭЛЕМЕНТ разделителя даты */
+.date-period__separate {
+  margin: 0 15px;
+}

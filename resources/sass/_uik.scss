@@ -1,0 +1,163 @@
+/* ПЕРЕМЕННЫЕ */
+$uik-color-border: #dedede;
+$uik-box-shadow: 1px 1px 6px rgba(60, 75, 100, 0.2);
+
+/* БЛОК участковые избирательные комиссии */
+.uik {
+  position: relative;
+}
+
+/* ЭЛЕМЕНТ со списком плитки значков */
+.uik__tile {
+
+}
+
+/* ЭЛЕМЕНТ контейнера с разбивкой на столбцы */
+.uik__container {
+  display: flex;
+  margin: 20px -15px;
+}
+
+/* ЭЛЕМЕНТЫ фильтра, карты, таблицы и диаграммы на странице проверки */
+.uik__table,
+.uik__chart,
+.uik__filter,
+.uik__map {
+  margin: 0 15px;
+}
+
+/* ЭЛЕМЕНТ с фильтром */
+.uik__filter {
+  flex: 0 1 350px;
+}
+
+/* ЭЛЕМЕНТ с картой */
+.uik__map {
+  flex-grow: 1;
+}
+
+/* ЭЛЕМЕНТ заголовка с нижним подчеркиванием */
+.uik__title {
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid $uik-color-border;
+  margin: 0 0 10px;
+}
+
+/* ЭЛЕМЕНТ с таблицей на странице проверки */
+.uik__table {
+  flex: 1 1 auto;
+}
+
+/* ЭЛЕМЕНТ с диаграммой на странице проверки */
+.uik__chart {
+  margin: 0 15px 0 0;
+  padding: 0 0 0 15px;
+  border-left: 1px solid $uik-color-border;
+  flex: 0 1 calc(40% - 15px);
+}
+
+/* БЛОК с плиткой значков */
+.uik-tile {
+  list-style-type: none;
+  display: flex;
+  margin: 0 -10px;
+  padding: 0;
+}
+
+/* ЭЛЕМЕНТ плитки */
+.uik-tile__item {
+  padding: 20px;
+  height: 150px;
+  box-shadow: $uik-box-shadow;
+  position: relative;
+  margin: 0 10px;
+  border: 1px solid $uik-color-border;
+  width: calc(100% / 6 - 10px);
+
+  &:after {
+    content: '\E83B';
+    font-family: $font-icons;
+    position: absolute;
+    display: block;
+    font-size: 130px;
+    top: 50%;
+    right: 10px;
+    color: rgba(65, 105, 225, 0.1);
+    line-height: 1;
+    transform: translateY(-50%);
+  }
+}
+
+/* МОДИФИКАТОР плитки - подходят */
+.uik-tile__item--settings {
+  &:after {
+    content: '\E80D';
+  }
+}
+
+/* МОДИФИКАТОР плитки - не подходят */
+.uik-tile__item--negative {
+  &:after {
+    content: '\E822';
+  }
+}
+
+/* МОДИФИКАТОР плитки - события */
+.uik-tile__item--event {
+  &:after {
+    content: '\E821';
+  }
+}
+
+/* МОДИФИКАТОР плитки - голосов */
+.uik-tile__item--voice {
+  &:after {
+    content: '\E812';
+  }
+}
+
+/* МОДИФИКАТОР плитки - отклонение явки */
+.uik-tile__item--offset {
+  &:after {
+    content: '\E83E';
+  }
+}
+
+/* ЭЛЕМЕНТ заголовка плитки */
+.uik-tile__title {
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 1;
+}
+
+/* ЭЛЕМЕНТ с текстом плитки */
+.uik-tile__text {
+  font-size: 14px;
+  line-height: 1;
+  margin: 5px 0;
+}
+
+/* ЭЛЕМЕНТ со значением */
+.uik-tile__value {
+  font-weight: bold;
+  font-size: 28px;
+  line-height: 1;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
+/* БЛОК список типов нарушений в таблице на странице проверки */
+.uik-type-list {
+  list-style-type: none;
+  display: flex;
+  margin: 0 -3px;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+/* ЭЛЕМЕНТ типа нарушений */
+.uik-type-list__item {
+  margin: 0 3px;
+}

@@ -1,0 +1,90 @@
+@import "variables";
+
+/* ПЕРЕМЕННЫЕ */
+$active-color-box-blue: $color-bg-blue;
+
+/* БЛОК переключателя */
+.toggle {
+  display: flex;
+  align-items: center;
+
+  input:disabled ~ label {
+    cursor: default;
+  }
+}
+
+/* ЭЛЕМЕНТ контейнера */
+.toggle__wrap {
+  width: 60px;
+  height: 30px;
+  border-radius: $border-radius;
+  border: 1px solid $color-border;
+  display: flex;
+  align-items: center;
+  transition: border-color 0.2s;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+
+  &:before,
+  &:after {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: $color-border;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 4px;
+    transition: opacity 0.2s;
+  }
+
+  &:before {
+    content: "off";
+  }
+
+  &:after {
+    content: "on";
+    color: $active-color-box-blue;
+    right: auto;
+    left: 6px;
+    opacity: 0;
+  }
+
+  input:checked + & {
+    border-color: $active-color-box-blue;
+
+    &:before {
+      opacity: 0;
+    }
+
+    &:after {
+      opacity: 1;
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ язычка */
+.toggle__tongue {
+  width: 24px;
+  height: 24px;
+  background: $color-border;
+  border-radius: $border-radius;
+  position: relative;
+  left: 2px;
+  transition: left 0.2s, background-color 0.2s;
+
+  input:checked + .toggle__wrap > & {
+    left: 32px;
+    background-color: $active-color-box-blue;
+  }
+}
+
+/* ЭЛЕМЕНТ ярлыка с описанием */
+.toggle__label {
+  margin: 0;
+  padding: 0 0 0 10px;
+  white-space: nowrap;
+  color: $color-text-base;
+  font-size: 14px;
+}

@@ -1,0 +1,30 @@
+/* ПЕРЕМЕННЫЕ */
+$color-bg-wrapper: rgba(255, 255, 255, 0.7);
+
+/* БЛОК предзагрузчика */
+.preloader {
+  position: absolute;
+  background: $color-bg-wrapper;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+
+  #app > & {
+    display: none;
+  }
+
+  [v-cloak] > & {
+    display: flex !important;
+    position: fixed;
+    border-radius: 0;
+  }
+}
+
+
+

@@ -1,0 +1,35 @@
+/* БЛОК разметки страницы */
+.layout {
+
+}
+
+/* ЭЛЕМЕНТ сайдбара */
+.layout__aside {
+  width: 256px;
+  flex: 0 1 auto;
+  position: fixed;
+  height: 100%;
+  transition: width 0.08s;
+
+  .is-opened > & {
+    width: 0;
+  }
+}
+
+/* ЭЛЕМЕНТ контетна */
+.layout__content {
+  width: calc(100% - 256px);
+  margin-left: 256px;
+  flex: 0 0 auto;
+  transition: width 0.08s, margin-left 0.08s;
+
+  .is-opened > & {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+/* ЭЛЕМЕНТ контейнера тела */
+.layout__container {
+  padding: 20px;
+}

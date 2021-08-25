@@ -1,0 +1,81 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$font-size: 14px;
+$color-button-background: #ffffff;
+$transition-time: 0.15s ease-in-out;
+
+$active-box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+$active-color-border: #a1cbef;
+
+/* БЛОК кнопки с выпадающим списком */
+.dropdown {
+  line-height: 1;
+  position: relative;
+  width: 100%;
+}
+
+/* ЭЛЕМЕНТ кнопки */
+.dropdown__btn {
+  display: flex;
+  width: 100%;
+  height: 38px;
+  align-items: center;
+  padding: 0 30px 0 15px;
+  white-space: nowrap;
+  position: relative;
+  margin: 0;
+  font-size: $font-size;
+  color: $color-text-base;
+  background-color: $color-button-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  transition: border-color $transition-time, box-shadow $transition-time;
+
+  &:after {
+    content: "\E800";
+    font-family: $font-icons-base;
+    position: absolute;
+    right: 14px;
+  }
+
+  input:checked + & {
+    border-color: $active-color-border;
+    outline: 0;
+    box-shadow: $active-box-shadow;
+  }
+}
+
+/* МОДИФИКАТОР для кнопки - тонкий */
+.dropdown__btn--slim {
+  height: 31px;
+  padding: 5px 10px;
+}
+
+/* ЭЛЕМЕНТ поиска */
+.dropdown__input {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: "\E800";
+    font-family: $font-icons-base;
+    position: absolute;
+    right: 15px;
+    font-size: 14px;
+  }
+}
+
+/* ЭЛЕМЕНТ выпадающего списка */
+.dropdown__dropdown {
+  min-width: 100%;
+  position: absolute;
+  z-index: 100;
+  display: block;
+  background: #ffffff;
+  border: 1px solid #a0a0a0;
+  overflow: hidden;
+  max-height: 215px;
+  overflow-y: auto;
+}

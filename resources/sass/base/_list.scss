@@ -1,0 +1,50 @@
+@import "base/variables";
+
+/* БЛОК со списком */
+.list {
+  list-style-type: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+/* МОДИФИКАТОР списка - перенос строк */
+.list--flex {
+  display: flex;
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-top: -15px;
+  margin-bottom: -15px;
+
+  li {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+/* ЭЛЕМЕНТ списка */
+.list__item {
+  margin: 15px 0;
+  display: flex;
+  align-items: center;
+}
+
+/* МОДИФИКАТОР элемента списка с вводом значения */
+.list__item--key {
+  &:before {
+    content: attr(data-key);
+    font-weight: bold;
+    margin: 0 15px 0 0;
+    white-space: nowrap;
+    font-size: 15px;
+  }
+}
+
+/* МОДИФИКАТОР для списка - перенос строк */
+.list__item--wrap {
+  flex-wrap: wrap;
+
+  &:before {
+    margin: 0 0 7px;
+    display: block;
+  }
+}

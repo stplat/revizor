@@ -1,0 +1,74 @@
+@import "variables";
+
+/* НАСТРОЙКИ */
+$color-text: #3c4b64;
+$color-border: #ced4da;
+$border-radius: 4px;
+
+/* БЛОК с полем числового значения */
+.input-number {
+}
+
+/* ЭЛЕМЕНТ с полем для ввода */
+.input-number__input {
+  position: relative;
+  width: 100px;
+
+  input {
+    padding: 5px 0 5px 10px;
+    -moz-appearance: textfield;
+    width: 100%;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    &:focus + .input-number__btn button {
+      border-color: $active-color-border;
+    }
+  }
+}
+
+/* ЭЛЕМЕНТ со спинами */
+.input-number__btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* ЭЛЕМЕНТ кнопочки - стрелки */
+.input-number__spin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  position: relative;
+  width: 19px;
+  height: 19px;
+  border: 1px solid $color-border;
+  border-radius: 0 $border-radius 0 0;
+  cursor: pointer;
+
+  &:before {
+    content: "\E805";
+    font-family: $font-icons-base;
+    font-size: 14px;
+    color: $color-text;
+    position: absolute;
+  }
+
+  &:active {
+    box-shadow: $shadow-box-inset;
+  }
+}
+
+/* МОДИФИКАТОР для стрелки - вниз */
+.input-number__spin--bottom {
+  border-radius: 0 0 $border-radius 0;
+  border-top: none;
+
+  &:before {
+    content: "\E801";
+  }
+}

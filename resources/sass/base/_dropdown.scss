@@ -1,0 +1,167 @@
+@import "variables";
+
+/* ПЕРЕМЕННЫЕ */
+$font-size: 14px;
+$color-button-background: #ffffff;
+$transition-time: 0.15s ease-in-out;
+
+$active-box-shadow: 0 0 0 0.2rem rgba(52, 144, 220, 0.25);
+$active-color-border: #a1cbef;
+
+/* БЛОК кнопки с выпадающим списком */
+.dropdown {
+  line-height: 1;
+  position: relative;
+  width: 100%;
+}
+
+/* ЭЛЕМЕНТ кнопки */
+.dropdown__btn {
+  display: flex;
+  width: 100%;
+  height: 38px;
+  align-items: center;
+  padding: 0 30px 0 15px;
+  white-space: nowrap;
+  position: relative;
+  margin: 0;
+  font-size: $font-size;
+  color: $color-text-base;
+  background-color: $color-button-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  transition: border-color $transition-time, box-shadow $transition-time;
+
+  &:after {
+    content: "\E800";
+    font-family: $font-icons-base;
+    position: absolute;
+    right: 15px;
+  }
+
+  input:checked + & {
+    border-color: $active-color-border;
+    outline: 0;
+    box-shadow: $active-box-shadow;
+  }
+}
+
+/* МОДИФИКАТОР для кнопки - красный */
+.dropdown__btn--red {
+  background-color: $color-bg-red;
+  color: #ffffff;
+  border-color: $color-bg-red;
+}
+
+/* МОДИФИКАТОР для кнопки - оранжевый */
+.dropdown__btn--orange {
+  background-color: $color-bg-orange;
+  color: #ffffff;
+  border-color: $color-bg-orange;
+}
+
+/* МОДИФИКАТОР для кнопки - желтый */
+.dropdown__btn--yellow {
+  background-color: $color-bg-yellow;
+  border-color: $color-bg-yellow;
+}
+
+/* МОДИФИКАТОР для кнопки - зеленый */
+.dropdown__btn--green {
+  background-color: $color-bg-green;
+  color: #ffffff;
+  border-color: $color-bg-green;
+}
+
+/* МОДИФИКАТОР для кнопки - серый */
+.dropdown__btn--grey {
+  background-color: $color-bg-grey;
+  border-color: $color-bg-grey;
+}
+
+/* МОДИФИКАТОР для кнопки - темно-серый */
+.dropdown__btn--dark-grey {
+  background-color: $color-bg-dark-grey;
+  color: #ffffff;
+  border-color: $color-bg-dark-grey;
+}
+
+/* МОДИФИКАТОР для кнопки - голубой */
+.dropdown__btn--blue {
+  background-color: $color-bg-blue;
+  color: #ffffff;
+  border-color: $color-bg-blue;
+}
+
+/* МОДИФИКАТОР для кнопки - тонкий */
+.dropdown__btn--slim {
+  height: 31px;
+  padding: 5px 10px;
+}
+
+/* ЭЛЕМЕНТ поиска */
+.dropdown__input {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &:before {
+    content: "\E800";
+    font-family: $font-icons-base;
+    position: absolute;
+    right: 15px;
+  }
+}
+
+/* ЭЛЕМЕНТ выпадающего списка */
+.dropdown__dropdown {
+  min-width: 100%;
+  position: absolute;
+  z-index: 100;
+  display: block;
+  background: #ffffff;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  overflow: hidden;
+  box-shadow: $shadow-box;
+  max-height: 215px;
+  overflow-y: auto;
+}
+
+/* ЭЛЕМЕНТ со списком опций для выбора */
+.dropdown__options {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ЭЛЕМЕНТ опции списка */
+.dropdown__option {
+  display: flex;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  input + label {
+    width: 100%;
+    padding: 8px 45px 8px 15px;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+
+  input:disabled + label {
+    color: $color-text-light;
+  }
+
+  input:not(:disabled) + label {
+    .no-touchevents &:hover {
+      background-color: $color-bg-blue;
+      color: #ffffff;
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@import "variables";
+
+/* ЭЛЕМЕНТ с полем для ввода */
+.comment__input {
+  padding: 0 0 25px;
+}
+
+/* ЭЛЕМЕНТ со списком комментариев */
+.comment__list {
+  padding: 10px 0;
+}
+
+/* БЛОК со списком комментариев */
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+  margin: -20px 0;
+
+  li {
+    margin: 20px 0;
+  }
+}
+
+/* ЭЛЕМЕНТ заголовка */
+.comment-item__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 0 3px;
+}
+
+/* ЭЛЕМЕНТ с именем */
+.comment-item__name {
+  font-weight: bold;
+}
+
+/* ЭЛЕМЕНТ с датой */
+.comment-item__date {
+  color: $color-text-light;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+/* ЭЛЕМЕНТ с сообщением */
+.comment-item__text {
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  padding: 8px 15px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 20px;
+}
