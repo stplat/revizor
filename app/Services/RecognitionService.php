@@ -291,6 +291,12 @@ class RecognitionService
                         ]);
                     }
                 });
+
+                if ($request->params['type'] == '1') {
+                    Camera::where('cam_numeric_id', $camera['id'])->update([
+                        'main' => $camera['countable'],
+                    ]);
+                }
             }
 
             if (in_array($item['uik_id'], $boxFlagUiks)) {
@@ -300,11 +306,6 @@ class RecognitionService
 
                     if ($item['countable']) {
                         foreach ($item['cameras'] as $camera) {
-                            if ($request->params['type'] == '1') {
-                                Camera::where('cam_numeric_id', $camera['id'])->update([
-                                    'main' => true,
-                                ]);
-                            }
 
                             // if (!$camera['countable']) {
                             //     $boxNormalized = collect($camera['image']['boxes'])->reduce(function ($carry, $item) use ($constant) {
@@ -356,14 +357,6 @@ class RecognitionService
                         $violation->save();
 
                         foreach ($item['cameras'] as $camera) {
-                            if ($request->params['type'] == '1') {
-                                Camera::where('cam_numeric_id', $camera['id'])->update([
-                                    'main' => false,
-                                ]);
-                            }
-                        }
-
-                        foreach ($item['cameras'] as $camera) {
                             $violationImages = new ViolationImage();
                             $violationImages->violation_id = $violation->violation_id;
                             $violationImages->image_id = $camera['image']['image_id'];
@@ -386,11 +379,6 @@ class RecognitionService
                 }
 
                 foreach ($item['cameras'] as $cameraItem) {
-                    if ($request->params['type'] == '1') {
-                        Camera::where('cam_numeric_id', $cameraItem['id'])->update([
-                            'main' => false,
-                        ]);
-                    }
 
                     if ($violation->violation_id) {
                         $violationImages = new ViolationImage();
