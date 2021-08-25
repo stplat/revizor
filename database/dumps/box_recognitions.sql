@@ -1,6 +1,7 @@
 INSERT INTO public.box_recognitions (recognition_id, uik_id, cam_numeric_id, video_id, cam_quality, recognition_datetime, boxes_flag, boxes_num, checking, checked, checked_by, check_datetime, recognized_by)
 VALUES
 (20,11,21,2,0.7072116811,'2021-07-17 16:01:39.425618',true,1,false,false,null,null,1),
+(100,11,22,2,0.7072116811,'2021-08-17 16:01:39.425618',true,1,false,false,null,null,1),
 (21,11,22,719,0.2853867720,'2021-07-17 16:03:05.668043',true,1,false,false,null,null,1),
 (22,12,23,532,0.8403206702,'2021-07-17 16:04:37.603975',true,1,false,false,null,null,1),
 (23,12,24,171,0,'2021-07-17 16:05:57.501019',false,0,false,false,null,null,1),

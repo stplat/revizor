@@ -293,16 +293,13 @@ class RecognitionService
                 });
             }
 
-            if (in_array($item['uik_id'], $boxFlagUiks)) {
+            if (in_array($item['uik_id'], $boxFlagUiks) && $request->params['type'] == '1') {
                 $violation = new Violation();
 
                 if (!in_array($item['uik_id'], $violationUiks)) {
 
                     if ($item['countable']) {
                         foreach ($item['cameras'] as $camera) {
-                            Camera::where('cam_numeric_id', $camera['id'])->update([
-                                'main' => $camera['countable'],
-                            ]);
 
                             if ($camera['countable']) {
                                 $boxNormalized = collect($camera['image']['boxes'])->reduce(function ($carry, $item) use ($constant) {
@@ -335,6 +332,10 @@ class RecognitionService
 
                                 array_push($violationUiks, $item['uik_id']);
                             }
+
+                            Camera::where('cam_numeric_id', $camera['id'])->update([
+                                'main' => $camera['countable'],
+                            ]);
 
                             if ($violation->violation_id) {
                                 $violationImages = new ViolationImage();
