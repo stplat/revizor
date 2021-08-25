@@ -131,7 +131,7 @@ export default {
      * @return void
      */
     clickSendRecognitions(current = false) {
-      // this.$store.commit("ViewRecognition/setIsLoading", true);
+      this.$store.commit("ViewRecognition/setIsLoading", true);
       let { deletedBoxes } = this.data;
 
       const boxes = [];

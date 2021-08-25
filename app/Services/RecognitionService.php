@@ -293,15 +293,20 @@ class RecognitionService
                 });
             }
 
-            if (in_array($item['uik_id'], $boxFlagUiks) && $request->params['type'] == '1') {
+            if (in_array($item['uik_id'], $boxFlagUiks)) {
                 $violation = new Violation();
 
                 if (!in_array($item['uik_id'], $violationUiks)) {
 
                     if ($item['countable']) {
                         foreach ($item['cameras'] as $camera) {
+                            if ($request->params['type'] == '1') {
+                                Camera::where('cam_numeric_id', $camera['id'])->update([
+                                    'main' => $camera['countable'],
+                                ]);
+                            }
 
-                            if ($camera['countable']) {
+                            if (!$camera['countable']) {
                                 $boxNormalized = collect($camera['image']['boxes'])->reduce(function ($carry, $item) use ($constant) {
                                     return (float)$item['normalized_width_k'] < (float)$constant->boxes_width_threshold ? true : $carry;
                                 }, false);
@@ -314,9 +319,11 @@ class RecognitionService
                                     $violation->status_id = 1;
                                     $violation->save();
 
-                                    Camera::where('cam_numeric_id', $camera['id'])->update([
-                                        'main' => false,
-                                    ]);
+                                    if ($request->params['type'] == '1') {
+                                        Camera::where('cam_numeric_id', $camera['id'])->update([
+                                            'main' => false,
+                                        ]);
+                                    }
 
                                     $uikLabel = UikLabel::firstOrCreate(
                                         [
@@ -332,10 +339,6 @@ class RecognitionService
 
                                 array_push($violationUiks, $item['uik_id']);
                             }
-
-                            Camera::where('cam_numeric_id', $camera['id'])->update([
-                                'main' => $camera['countable'],
-                            ]);
 
                             if ($violation->violation_id) {
                                 $violationImages = new ViolationImage();
@@ -375,9 +378,11 @@ class RecognitionService
                 }
 
                 foreach ($item['cameras'] as $cameraItem) {
-                    Camera::where('cam_numeric_id', $cameraItem['id'])->update([
-                        'main' => false,
-                    ]);
+                    if ($request->params['type'] == '1') {
+                        Camera::where('cam_numeric_id', $cameraItem['id'])->update([
+                            'main' => false,
+                        ]);
+                    }
 
                     if ($violation->violation_id) {
                         $violationImages = new ViolationImage();
