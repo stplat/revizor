@@ -182,6 +182,7 @@ export default {
 
           return recognition;
         });
+      console.log(recognitions);
 
       this.$store
         .dispatch("ViewRecognition/updateBox", {

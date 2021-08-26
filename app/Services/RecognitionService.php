@@ -304,51 +304,7 @@ class RecognitionService
 
                 if (!in_array($item['uik_id'], $violationUiks)) {
 
-                    if ($item['countable']) {
-                        foreach ($item['cameras'] as $camera) {
-
-                            // if (!$camera['countable']) {
-                            //     $boxNormalized = collect($camera['image']['boxes'])->reduce(function ($carry, $item) use ($constant) {
-                            //         return (float)$item['normalized_width_k'] < (float)$constant->boxes_width_threshold ? true : $carry;
-                            //     }, false);
-
-                            //     if ($boxNormalized) {
-                            //         $violation->cam_numeric_id = $camera['id'];
-                            //         $violation->violation_type_id = 4;
-                            //         $violation->creation_datetime = now()->format('Y-m-d H:i:s');
-                            //         $violation->violation_datetime_start = $item['recognition_datetime'];
-                            //         $violation->status_id = 1;
-                            //         $violation->save();
-
-                            //         if ($request->params['type'] == '1') {
-                            //             Camera::where('cam_numeric_id', $camera['id'])->update([
-                            //                 'main' => false,
-                            //             ]);
-                            //         }
-
-                            //         $uikLabel = UikLabel::firstOrCreate(
-                            //             [
-                            //                 'uik_id' => $item['uik_id'],
-                            //                 'label_id' => 3
-                            //             ],
-                            //             [
-                            //                 'uik_id' => $item['uik_id'],
-                            //                 'label_id' => 3
-                            //             ]
-                            //         );
-                            //     }
-
-                            //     array_push($violationUiks, $item['uik_id']);
-                            // }
-
-                            if ($violation->violation_id) {
-                                $violationImages = new ViolationImage();
-                                $violationImages->violation_id = $violation->violation_id;
-                                $violationImages->image_id = $camera['image']['image_id'];
-                                $violationImages->save();
-                            }
-                        }
-                    } else {
+                    if (!$item['countable']) {
                         $violation->cam_numeric_id = count($item['cameras']) ? $item['cameras'][0]['id'] : null;
                         $violation->violation_type_id = 4;
                         $violation->creation_datetime = now()->format('Y-m-d H:i:s');

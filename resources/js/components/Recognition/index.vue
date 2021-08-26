@@ -92,7 +92,7 @@ export default {
     return {
       data: {
         type: "",
-        limit: "5",
+        limit: "1",
         uiks: [],
         regions: []
       },
@@ -178,7 +178,7 @@ export default {
     /* Список количества выгружаемых данных */
     computedCountList() {
       return [
-        { id: 1, value: "5", label: "5" },
+        { id: 1, value: "1", label: "1" },
         { id: 2, value: "10", label: "10" },
         { id: 3, value: "20", label: "20" },
         { id: 4, value: "30", label: "30" }
