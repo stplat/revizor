@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
+    // $box = collect([]);
+    // $box->put('type', 'asd');
+    // $box->put('asd', 'asd');
+    // dd($box);
     /* Главная */
     Route::get('/', 'IndexController@index')->name('index');
     Route::post('/charts', 'IndexController@charts');

@@ -182,7 +182,6 @@ export default {
 
           return recognition;
         });
-      console.log(recognitions);
 
       this.$store
         .dispatch("ViewRecognition/updateBox", {
@@ -193,11 +192,15 @@ export default {
           current
         })
         .then(res => {
-          if (res.hasOwnProperty("errors")) {
+          if (res && res.hasOwnProperty("errors")) {
             this.errors = res.errors;
           } else {
             this.$emit("messages");
           }
+          this.$store.commit("ViewRecognition/setIsLoading", false);
+        })
+        .catch(error => {
+          console.log("clickSendRecognitions" + error);
           this.$store.commit("ViewRecognition/setIsLoading", false);
         });
     }
@@ -212,11 +215,13 @@ export default {
         "ViewRecognition/getUikListBySelectCamera"
       ];
 
-      this.uikCount = uiks.length;
-      this.uikIndex = 0;
-      this.uikList = uiks;
+      if (uiks) {
+        this.uikCount = uiks.length;
+        this.uikIndex = 0;
+        this.uikList = uiks;
+      }
 
-      return uiks;
+      return uiks ?? [];
     },
     /**
      * Общий прелоадер для всех карточек у отчетов

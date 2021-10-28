@@ -17,6 +17,7 @@ use App\Models\UikTiming;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class RecognitionService
 {
@@ -153,213 +154,215 @@ class RecognitionService
         $recognitions = collect($request->recognitions);
         $constant = Constant::first();
 
-        if (count($deletedBoxes)) {
-            BoxesInfo::destroy($deletedBoxes);
-        }
+        DB::transaction(function () use ($deletedBoxes, $boxes, $recognitions, $request) {
+            if (count($deletedBoxes)) {
+                BoxesInfo::destroy($deletedBoxes);
+            }
 
-        $boxes->each(function ($item) {
-            if (is_integer($item['box_id'])) {
-                $boxesInfo = BoxesInfo::where('box_id', $item['box_id'])->first();
+            $boxes->each(function ($item) {
+                if (is_integer($item['box_id'])) {
+                    $boxesInfo = BoxesInfo::where('box_id', $item['box_id'])->first();
 
-                if ($boxesInfo->type != $item['type']) {
-                    $boxesInfo->type = $item['type'];
-                    $boxesInfo->type_conf = 1.0;
-                }
+                    if ($boxesInfo->type != $item['type']) {
+                        $boxesInfo->type = $item['type'];
+                        $boxesInfo->type_conf = 1.0;
+                    }
 
-                if ($boxesInfo->box_bbox_coords != $item['box_bbox_coords']) {
+                    if ($boxesInfo->box_bbox_coords != $item['box_bbox_coords']) {
+                        $boxesInfo->box_quality = $item['box_quality'];
+                        $boxesInfo->conf = 1.0;
+                        $boxesInfo->normalized_width_k = $item['normalized_width_k'];
+                        $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
+                        $boxesInfo->centroid_k = $item['centroid_k'];
+                        $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
+                    }
+
+                    if ($boxesInfo->cap_type != $item['cap_type']) {
+                        $boxesInfo->cap_type = $item['cap_type'];
+                    }
+
+                    if ($boxesInfo->cap_type == 'poly' && $boxesInfo->cap_rot_bbox != $item['cap_rot_bbox']) {
+                        $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
+                        $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
+                    }
+
+                    if ($boxesInfo->cap_type == 'bbox' && $boxesInfo->cap_ort_bbox != $item['cap_ort_bbox']) {
+                        $boxesInfo->cap_ort_bbox = $item['cap_ort_bbox'];
+                        $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
+                    }
+
+                    $boxesInfo->save();
+                } else if (Str::contains($item['box_id'], 'temp')) {
+                    $boxNum = BoxesInfo::where('recognition_id', $item['recognition_id'])->orderBy('box_num', 'DESC')->first();
+                    $boxesInfo = new BoxesInfo();
+                    $boxesInfo->recognition_id = $item['recognition_id'];
+                    $boxesInfo->box_num = $boxNum ? $boxNum->box_num + 1 : 1;
                     $boxesInfo->box_quality = $item['box_quality'];
-                    $boxesInfo->conf = 1.0;
-                    $boxesInfo->normalized_width_k = $item['normalized_width_k'];
+                    $boxesInfo->conf = $item['conf'];
+                    $boxesInfo->type = $item['type'];
+                    $boxesInfo->type_conf = $item['type_conf'];
                     $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
-                    $boxesInfo->centroid_k = $item['centroid_k'];
+                    $boxesInfo->normalized_width_k = $item['normalized_width_k'];
                     $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
-                }
-
-                if ($boxesInfo->cap_type != $item['cap_type']) {
+                    $boxesInfo->centroid_k = $item['centroid_k'];
                     $boxesInfo->cap_type = $item['cap_type'];
-                }
-
-                if ($boxesInfo->cap_type == 'poly' && $boxesInfo->cap_rot_bbox != $item['cap_rot_bbox']) {
                     $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
                     $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
-                }
+                    $boxesInfo->save();
+                } else if (Str::contains($item['box_id'], 'clone')) {
+                    $boxNum = BoxesInfo::where('recognition_id', $item['recognition_id'])->orderBy('box_num', 'DESC')->first();
+                    $boxId = Str::afterLast($item['box_id'], 'clone-');
+                    $boxesInfoDonor = BoxesInfo::find($boxId);
 
-                if ($boxesInfo->cap_type == 'bbox' && $boxesInfo->cap_ort_bbox != $item['cap_ort_bbox']) {
+                    $boxesInfo = $boxesInfoDonor->replicate();
+                    $boxesInfo->recognition_id = $item['recognition_id'];
+                    $boxesInfo->box_num = $boxNum ? $boxNum->box_num + 1 : 1;
+                    $boxesInfo->box_quality = $item['box_quality'];
+                    $boxesInfo->conf = $item['conf'];
+                    $boxesInfo->type = $item['type'];
+                    $boxesInfo->type_conf = $item['type_conf'];
+                    $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
+                    $boxesInfo->normalized_width_k = $item['normalized_width_k'];
+                    $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
+                    $boxesInfo->centroid_k = $item['centroid_k'];
+                    $boxesInfo->cap_type = $item['cap_type'];
+                    $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
                     $boxesInfo->cap_ort_bbox = $item['cap_ort_bbox'];
                     $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
+                    $boxesInfo->save();
+                }
+            });
+
+            $boxFlagUiks = $recognitions->reduce(function ($carry, $item) {
+                if (!in_array($item['uik_id'], $carry) && $item['boxes_flag']) {
+                    array_push($carry, $item['uik_id']);
                 }
 
-                $boxesInfo->save();
-            } else if (Str::contains($item['box_id'], 'temp')) {
-                $boxNum = BoxesInfo::where('recognition_id', $item['recognition_id'])->orderBy('box_num', 'DESC')->first();
-                $boxesInfo = new BoxesInfo();
-                $boxesInfo->recognition_id = $item['recognition_id'];
-                $boxesInfo->box_num = $boxNum ? $boxNum->box_num + 1 : 1;
-                $boxesInfo->box_quality = $item['box_quality'];
-                $boxesInfo->conf = $item['conf'];
-                $boxesInfo->type = $item['type'];
-                $boxesInfo->type_conf = $item['type_conf'];
-                $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
-                $boxesInfo->normalized_width_k = $item['normalized_width_k'];
-                $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
-                $boxesInfo->centroid_k = $item['centroid_k'];
-                $boxesInfo->cap_type = $item['cap_type'];
-                $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
-                $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
-                $boxesInfo->save();
-            } else if (Str::contains($item['box_id'], 'clone')) {
-                $boxNum = BoxesInfo::where('recognition_id', $item['recognition_id'])->orderBy('box_num', 'DESC')->first();
-                $boxId = Str::afterLast($item['box_id'], 'clone-');
-                $boxesInfoDonor = BoxesInfo::find($boxId);
+                return $carry;
+            }, []);
 
-                $boxesInfo = $boxesInfoDonor->replicate();
-                $boxesInfo->recognition_id = $item['recognition_id'];
-                $boxesInfo->box_num = $boxNum ? $boxNum->box_num + 1 : 1;
-                $boxesInfo->box_quality = $item['box_quality'];
-                $boxesInfo->conf = $item['conf'];
-                $boxesInfo->type = $item['type'];
-                $boxesInfo->type_conf = $item['type_conf'];
-                $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
-                $boxesInfo->normalized_width_k = $item['normalized_width_k'];
-                $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
-                $boxesInfo->centroid_k = $item['centroid_k'];
-                $boxesInfo->cap_type = $item['cap_type'];
-                $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
-                $boxesInfo->cap_ort_bbox = $item['cap_ort_bbox'];
-                $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
-                $boxesInfo->save();
-            }
-        });
+            $violationUiks = [];
 
-        $boxFlagUiks = $recognitions->reduce(function ($carry, $item) {
-            if (!in_array($item['uik_id'], $carry) && $item['boxes_flag']) {
-                array_push($carry, $item['uik_id']);
-            }
+            foreach ($recognitions as $item) {
+                $boxRecognition = BoxRecognition::where('recognition_id', $item['id'])->first();
+                $boxRecognition->boxes_flag = $item['boxes_flag'];
+                $boxRecognition->cam_quality = $item['cam_quality'];
+                $boxRecognition->boxes_num = $item['boxes_num'];
+                $boxRecognition->checking = false;
+                $boxRecognition->checked = true;
+                $boxRecognition->checked_by = Auth::user()->user_id;
+                $boxRecognition->check_datetime = now()->format('Y-m-d H:i:s');
+                $boxRecognition->save();
 
-            return $carry;
-        }, []);
+                foreach ($item['cameras'] as $camera) {
+                    UikTiming::get()->each(function ($timing) use ($camera) {
 
-        $violationUiks = [];
+                        if ($timing['8h'] == $camera['video_id']) {
+                            $timing->update([
+                                'approved_8h' => $camera['recognition_id']
+                            ]);
+                        }
 
-        foreach ($recognitions as $item) {
-            $boxRecognition = BoxRecognition::where('recognition_id', $item['id'])->first();
-            $boxRecognition->boxes_flag = $item['boxes_flag'];
-            $boxRecognition->cam_quality = $item['cam_quality'];
-            $boxRecognition->boxes_num = $item['boxes_num'];
-            $boxRecognition->checking = false;
-            $boxRecognition->checked = true;
-            $boxRecognition->checked_by = Auth::user()->user_id;
-            $boxRecognition->check_datetime = now()->format('Y-m-d H:i:s');
-            $boxRecognition->save();
+                        if ($timing['10h'] == $camera['video_id']) {
+                            $timing->update([
+                                'approved_10h' => $camera['recognition_id']
+                            ]);
+                        }
 
-            foreach ($item['cameras'] as $camera) {
-                UikTiming::get()->each(function ($timing) use ($camera) {
+                        if ($timing['12h'] == $camera['video_id']) {
+                            $timing->update([
+                                'approved_12h' => $camera['recognition_id']
+                            ]);
+                        }
 
-                    if ($timing['8h'] == $camera['video_id']) {
-                        $timing->update([
-                            'approved_8h' => $camera['recognition_id']
+                        if ($timing['14h'] == $camera['video_id']) {
+                            $timing->update([
+                                'approved_14h' => $camera['recognition_id']
+                            ]);
+                        }
+
+                        if ($timing['16h'] == $camera['video_id']) {
+                            $timing->update([
+                                'approved_16h' => $camera['recognition_id']
+                            ]);
+                        }
+
+                        if ($timing['18h'] == $camera['video_id']) {
+                            $timing->update([
+                                'approved_18h' => $camera['recognition_id']
+                            ]);
+                        }
+                    });
+
+                    if ($request->params['type'] == '1') {
+                        Camera::where('cam_numeric_id', $camera['id'])->update([
+                            'main' => $camera['countable'],
                         ]);
                     }
-
-                    if ($timing['10h'] == $camera['video_id']) {
-                        $timing->update([
-                            'approved_10h' => $camera['recognition_id']
-                        ]);
-                    }
-
-                    if ($timing['12h'] == $camera['video_id']) {
-                        $timing->update([
-                            'approved_12h' => $camera['recognition_id']
-                        ]);
-                    }
-
-                    if ($timing['14h'] == $camera['video_id']) {
-                        $timing->update([
-                            'approved_14h' => $camera['recognition_id']
-                        ]);
-                    }
-
-                    if ($timing['16h'] == $camera['video_id']) {
-                        $timing->update([
-                            'approved_16h' => $camera['recognition_id']
-                        ]);
-                    }
-
-                    if ($timing['18h'] == $camera['video_id']) {
-                        $timing->update([
-                            'approved_18h' => $camera['recognition_id']
-                        ]);
-                    }
-                });
-
-                if ($request->params['type'] == '1') {
-                    Camera::where('cam_numeric_id', $camera['id'])->update([
-                        'main' => $camera['countable'],
-                    ]);
                 }
-            }
 
-            if (in_array($item['uik_id'], $boxFlagUiks)) {
-                $violation = new Violation();
+                if (in_array($item['uik_id'], $boxFlagUiks)) {
+                    $violation = new Violation();
 
-                if (!in_array($item['uik_id'], $violationUiks)) {
+                    if (!in_array($item['uik_id'], $violationUiks)) {
 
-                    if (!$item['countable']) {
+                        if (!$item['countable']) {
+                            $violation->cam_numeric_id = count($item['cameras']) ? $item['cameras'][0]['id'] : null;
+                            $violation->violation_type_id = 4;
+                            $violation->creation_datetime = now()->format('Y-m-d H:i:s');
+                            $violation->violation_datetime_start = $item['recognition_datetime'];
+                            $violation->status_id = 1;
+                            $violation->save();
+
+                            foreach ($item['cameras'] as $camera) {
+                                $violationImages = new ViolationImage();
+                                $violationImages->violation_id = $violation->violation_id;
+                                $violationImages->image_id = $camera['image']['image_id'];
+                                $violationImages->save();
+                            }
+
+                            array_push($violationUiks, $item['uik_id']);
+                        }
+                    }
+                } else {
+                    $violation = new Violation();
+
+                    if (!in_array($item['uik_id'], $violationUiks)) {
                         $violation->cam_numeric_id = count($item['cameras']) ? $item['cameras'][0]['id'] : null;
-                        $violation->violation_type_id = 4;
+                        $violation->violation_type_id = 5;
                         $violation->creation_datetime = now()->format('Y-m-d H:i:s');
                         $violation->violation_datetime_start = $item['recognition_datetime'];
                         $violation->status_id = 1;
                         $violation->save();
+                    }
 
-                        foreach ($item['cameras'] as $camera) {
+                    foreach ($item['cameras'] as $cameraItem) {
+
+                        if ($violation->violation_id) {
                             $violationImages = new ViolationImage();
                             $violationImages->violation_id = $violation->violation_id;
-                            $violationImages->image_id = $camera['image']['image_id'];
+                            $violationImages->image_id = $cameraItem['image']['image_id'];
                             $violationImages->save();
                         }
-
-                        array_push($violationUiks, $item['uik_id']);
                     }
+
+                    $uikLabel = UikLabel::firstOrCreate(
+                        [
+                            'uik_id' => $item['uik_id'],
+                            'label_id' => 3
+                        ],
+                        [
+                            'uik_id' => $item['uik_id'],
+                            'label_id' => 3
+                        ]
+                    );
+
+                    $uikLabel->save();
+
+                    array_push($violationUiks, $item['uik_id']);
                 }
-            } else {
-                $violation = new Violation();
-
-                if (!in_array($item['uik_id'], $violationUiks)) {
-                    $violation->cam_numeric_id = count($item['cameras']) ? $item['cameras'][0]['id'] : null;
-                    $violation->violation_type_id = 5;
-                    $violation->creation_datetime = now()->format('Y-m-d H:i:s');
-                    $violation->violation_datetime_start = $item['recognition_datetime'];
-                    $violation->status_id = 1;
-                    $violation->save();
-                }
-
-                foreach ($item['cameras'] as $cameraItem) {
-
-                    if ($violation->violation_id) {
-                        $violationImages = new ViolationImage();
-                        $violationImages->violation_id = $violation->violation_id;
-                        $violationImages->image_id = $cameraItem['image']['image_id'];
-                        $violationImages->save();
-                    }
-                }
-
-                $uikLabel = UikLabel::firstOrCreate(
-                    [
-                        'uik_id' => $item['uik_id'],
-                        'label_id' => 3
-                    ],
-                    [
-                        'uik_id' => $item['uik_id'],
-                        'label_id' => 3
-                    ]
-                );
-
-                $uikLabel->save();
-
-                array_push($violationUiks, $item['uik_id']);
             }
-        }
+        });
 
         return $this->showReport($collect);
     }

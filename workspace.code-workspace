@@ -9,7 +9,7 @@
     "vsicons.presets.jsonOfficial": true,
     "vsicons.presets.foldersAllDefaultIcon": true,
     "workbench.iconTheme": "vscode-icons",
-    "workbench.colorTheme": "Default Light+",
+    // "workbench.colorTheme": "Default Light+",
     "workbench.tree.indent": 20,
     "[vue]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"

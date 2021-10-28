@@ -26,12 +26,12 @@ require('./plugins/Leaflet');
 require('./plugins/Chart');
 
 /* Views */
-Vue.component('view-layout', () => import('@/views/ViewLayout'));
-Vue.component('view-check-list', () => import('@/views/ViewCheckList'));
-Vue.component('view-check', () => import('@/views/ViewCheck'));
-Vue.component('view-index', () => import('@/views/ViewIndex'));
-Vue.component('view-recognition', () => import('@/views/ViewRecognition'));
-Vue.component('view-user', () => import('@/views/ViewUser'));
+Vue.component('view-layout', require('@/views/ViewLayout').default);
+Vue.component('view-check-list', require('@/views/ViewCheckList').default);
+Vue.component('view-check', require('@/views/ViewCheck').default);
+Vue.component('view-index', require('@/views/ViewIndex').default);
+Vue.component('view-recognition', require('@/views/ViewRecognition').default);
+Vue.component('view-user', require('@/views/ViewUser').default);
 
 /* Plugin Components */
 Vue.component('swiper', require('./components/Swiper').default);
@@ -82,25 +82,25 @@ Vue.component('v-form', require('./components/_base/VForm').default);
 Vue.component('v-number', require('./components/_base/VNumber').default);
 
 /* Custom Components */
-// Vue.component('check', () => import('./components/Check'));
-Vue.component('check-events', () => import('./components/CheckEvents'));
-Vue.component('check-info', () => import('./components/CheckInfo'));
-Vue.component('check-list', () => import('./components/CheckList'));
-Vue.component('check-uik', () => import('./components/Check/CheckUik'));
-Vue.component('check-schema', () => import('./components/Check/CheckSchema'));
-Vue.component('check-settings', () => import('./components/CheckSettings'));
-Vue.component('leaflet-map', () => import('./components/LeafletMap'));
-Vue.component('modal', () => import('./components/Modal'));
-Vue.component('recognition', () => import('./components/Recognition'));
-Vue.component('sign-type', () => import('./components/SignType'));
-Vue.component('sign-status', () => import('./components/SignStatus'));
-Vue.component('user-list', () => import('./components/UserList'));
+// Vue.component('check', require('./components/Check'));
+Vue.component('check-events', require('./components/CheckEvents').default);
+Vue.component('check-info', require('./components/CheckInfo').default);
+Vue.component('check-list', require('./components/CheckList').default);
+Vue.component('check-uik', require('./components/Check/CheckUik').default);
+Vue.component('check-schema', require('./components/Check/CheckSchema').default);
+Vue.component('check-settings', require('./components/CheckSettings').default);
+Vue.component('leaflet-map', require('./components/LeafletMap').default);
+Vue.component('modal', require('./components/Modal').default);
+Vue.component('recognition', require('./components/Recognition').default);
+Vue.component('sign-type', require('./components/SignType').default);
+Vue.component('sign-status', require('./components/SignStatus').default);
+Vue.component('user-list', require('./components/UserList').default);
 
 
 /* TODO переделать в базовые компоненты */
-Vue.component('search-checkbox', () => import('./components/SearchCheckbox'));
-Vue.component('tip-overflow', () => import('./components/TipOverflow'));
-Vue.component('v-filter', () => import('./components/VFilter'));
+Vue.component('search-checkbox', require('./components/SearchCheckbox').default);
+Vue.component('tip-overflow', require('./components/TipOverflow').default);
+Vue.component('v-filter', require('./components/VFilter').default);
 
 
 if (document.querySelectorAll('#app').length) {

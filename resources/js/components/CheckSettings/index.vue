@@ -155,10 +155,10 @@
 <script>
 export default {
   components: {
-    CheckRemove: () => import("./CheckRemove"),
-    UikUpload: () => import("./UikUpload"),
-    OfficialVoteUpload: () => import("./OfficialVoteUpload"),
-    IntermediateVoteUpload: () => import("./IntermediateVoteUpload")
+    CheckRemove: require("./CheckRemove"),
+    UikUpload: require("./UikUpload"),
+    OfficialVoteUpload: require("./OfficialVoteUpload"),
+    IntermediateVoteUpload: require("./IntermediateVoteUpload")
   },
   props: {},
   data() {

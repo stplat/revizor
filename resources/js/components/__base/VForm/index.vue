@@ -73,15 +73,15 @@
 <script>
 export default {
   components: {
-    VFormFile: () => import("./VFormFile"),
-    VFormToggle: () => import("./VFormToggle"),
-    VFormMultiTextbox: () => import("./VFromMultiTextbox"),
-    VFormDatePeriod: () => import("./VFormDatePeriod"),
-    FormSelect: () => import("./VFormSelect"),
-    FormInput: () => import("./VFormInput"),
-    FormNumber: () => import("./VFormNumber"),
-    FormToggleList: () => import("./VFormToggleList"),
-    FormToggleCheckboxList: () => import("./VFormToggleCheckboxList")
+    VFormFile: () => require("./VFormFile").default,
+    VFormToggle: () => require("./VFormToggle").default,
+    VFormMultiTextbox: () => require("./VFromMultiTextbox").default,
+    VFormDatePeriod: () => require("./VFormDatePeriod").default,
+    FormSelect: () => require("./VFormSelect").default,
+    FormInput: () => require("./VFormInput").default,
+    FormNumber: () => require("./VFormNumber").default,
+    FormToggleList: () => require("./VFormToggleList").default,
+    FormToggleCheckboxList: () => require("./VFormToggleCheckboxList").default
   },
   model: {
     prop: "modelValue",

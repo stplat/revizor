@@ -43,10 +43,10 @@ export default {
     async updateBox({ commit, getters }, payload) {
       let { current, params } = payload;
       payload.recognitionIds = getters['getRecognitionIds'];
-
+      console.log(payload)
       const res = await axios.put(this.state.requestPath + `recognitions/box`, payload)
         .catch(err => console.log('In ViewRecognition/updateBox - ' + err));
-
+      console.log(res)
       if (!res.data.errors) {
         switch (params.type) {
           case '1':
@@ -84,7 +84,7 @@ export default {
 
       payload.recognitions = getters['getRecognitionIds'];
 
-      if (getters['getRecognitionIds'].length) {
+      if (getters['getRecognitionIds'] && getters['getRecognitionIds'].length) {
         const res = await axios.put(this.state.requestPath + `recognitions/checking`, payload)
           .catch(err => console.log('In ViewRecognition/updateCheckingRecognition - ' + err));
 
