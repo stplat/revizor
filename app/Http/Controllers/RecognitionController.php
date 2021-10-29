@@ -30,19 +30,6 @@ class RecognitionController extends Controller
      */
     public function index()
     {
-        // dd($this->recognitionService->getPrevRecognition(7));
-        // $repo = app(BoxRecognitionRepository::class);
-        // $result = $repo->findRecognitionsForCheckBoxes(collect((object)[
-        //     'uiks' => [],
-        //     'regions' => [],
-        //     'type' => '2',
-        //     'limit' => '30',
-        //     'checkId' => 1
-        // ]));
-
-        // dd($result->toArray());
-
-
         return view('recognitions')->with([
             'data' => $this->recognitionService->getFilterList(),
         ]);

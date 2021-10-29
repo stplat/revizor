@@ -78,6 +78,7 @@ class RecognitionService
         $collect = collect($request)->put('checkId', $checkId);
         $result = [];
         $count = 0;
+        $recognitionIds = collect();
 
         if ($request['recognitionIds'] && count($request['recognitionIds'])) {
             BoxRecognition::whereIn('recognition_id', $request['recognitionIds'])->update([
@@ -87,7 +88,6 @@ class RecognitionService
 
         if ($request['type'] === '1') {
             $result = $this->boxRecognition->findRecognitionsForSelectCamera($collect);
-            $recognitionIds = collect();
 
             foreach ($result as $uik) {
                 foreach ($uik['recognitions'] as $recognition) {
@@ -154,7 +154,7 @@ class RecognitionService
         $recognitions = collect($request->recognitions);
         $constant = Constant::first();
 
-        DB::transaction(function () use ($deletedBoxes, $boxes, $recognitions, $request) {
+        DB::transaction(function () use ($checkId, $deletedBoxes, $boxes, $recognitions, $request) {
             if (count($deletedBoxes)) {
                 BoxesInfo::destroy($deletedBoxes);
             }
@@ -163,35 +163,37 @@ class RecognitionService
                 if (is_integer($item['box_id'])) {
                     $boxesInfo = BoxesInfo::where('box_id', $item['box_id'])->first();
 
-                    if ($boxesInfo->type != $item['type']) {
-                        $boxesInfo->type = $item['type'];
-                        $boxesInfo->type_conf = 1.0;
-                    }
+                    if ($boxesInfo) {
+                        if ($boxesInfo->type != $item['type']) {
+                            $boxesInfo->type = $item['type'];
+                            $boxesInfo->type_conf = 1.0;
+                        }
 
-                    if ($boxesInfo->box_bbox_coords != $item['box_bbox_coords']) {
-                        $boxesInfo->box_quality = $item['box_quality'];
-                        $boxesInfo->conf = 1.0;
-                        $boxesInfo->normalized_width_k = $item['normalized_width_k'];
-                        $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
-                        $boxesInfo->centroid_k = $item['centroid_k'];
-                        $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
-                    }
+                        if ($boxesInfo->box_bbox_coords != $item['box_bbox_coords']) {
+                            $boxesInfo->box_quality = $item['box_quality'];
+                            $boxesInfo->conf = 1.0;
+                            $boxesInfo->normalized_width_k = $item['normalized_width_k'];
+                            $boxesInfo->normalized_dist_k = $item['normalized_dist_k'];
+                            $boxesInfo->centroid_k = $item['centroid_k'];
+                            $boxesInfo->box_bbox_coords = $item['box_bbox_coords'];
+                        }
 
-                    if ($boxesInfo->cap_type != $item['cap_type']) {
-                        $boxesInfo->cap_type = $item['cap_type'];
-                    }
+                        if ($boxesInfo->cap_type != $item['cap_type']) {
+                            $boxesInfo->cap_type = $item['cap_type'];
+                        }
 
-                    if ($boxesInfo->cap_type == 'poly' && $boxesInfo->cap_rot_bbox != $item['cap_rot_bbox']) {
-                        $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
-                        $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
-                    }
+                        if ($boxesInfo->cap_type == 'poly' && $boxesInfo->cap_rot_bbox != $item['cap_rot_bbox']) {
+                            $boxesInfo->cap_rot_bbox = $item['cap_rot_bbox'];
+                            $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
+                        }
 
-                    if ($boxesInfo->cap_type == 'bbox' && $boxesInfo->cap_ort_bbox != $item['cap_ort_bbox']) {
-                        $boxesInfo->cap_ort_bbox = $item['cap_ort_bbox'];
-                        $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
-                    }
+                        if ($boxesInfo->cap_type == 'bbox' && $boxesInfo->cap_ort_bbox != $item['cap_ort_bbox']) {
+                            $boxesInfo->cap_ort_bbox = $item['cap_ort_bbox'];
+                            $boxesInfo->cap_centroid_k = $item['cap_centroid_k'];
+                        }
 
-                    $boxesInfo->save();
+                        $boxesInfo->save();
+                    }
                 } else if (Str::contains($item['box_id'], 'temp')) {
                     $boxNum = BoxesInfo::where('recognition_id', $item['recognition_id'])->orderBy('box_num', 'DESC')->first();
                     $boxesInfo = new BoxesInfo();
@@ -255,44 +257,48 @@ class RecognitionService
                 $boxRecognition->save();
 
                 foreach ($item['cameras'] as $camera) {
-                    UikTiming::get()->each(function ($timing) use ($camera) {
+                    $uikTiming = UikTiming::where('check_id', $checkId)->get();
+                    if ($uikTiming) {
+                        foreach ($uikTiming as $timing) {
 
-                        if ($timing['8h'] == $camera['video_id']) {
-                            $timing->update([
-                                'approved_8h' => $camera['recognition_id']
-                            ]);
-                        }
+                            if ($timing['8h'] == $camera['video_id']) {
+                                $timing->update([
+                                    'approved_8h' => $camera['recognition_id']
+                                ]);
+                            }
 
-                        if ($timing['10h'] == $camera['video_id']) {
-                            $timing->update([
-                                'approved_10h' => $camera['recognition_id']
-                            ]);
-                        }
+                            if ($timing['10h'] == $camera['video_id']) {
+                                $timing->update([
+                                    'approved_10h' => $camera['recognition_id']
+                                ]);
+                            }
 
-                        if ($timing['12h'] == $camera['video_id']) {
-                            $timing->update([
-                                'approved_12h' => $camera['recognition_id']
-                            ]);
-                        }
+                            if ($timing['12h'] == $camera['video_id']) {
+                                $timing->update([
+                                    'approved_12h' => $camera['recognition_id']
+                                ]);
+                            }
 
-                        if ($timing['14h'] == $camera['video_id']) {
-                            $timing->update([
-                                'approved_14h' => $camera['recognition_id']
-                            ]);
-                        }
+                            if ($timing['14h'] == $camera['video_id']) {
+                                $timing->update([
+                                    'approved_14h' => $camera['recognition_id']
+                                ]);
+                            }
 
-                        if ($timing['16h'] == $camera['video_id']) {
-                            $timing->update([
-                                'approved_16h' => $camera['recognition_id']
-                            ]);
-                        }
+                            if ($timing['16h'] == $camera['video_id']) {
+                                $timing->update([
+                                    'approved_16h' => $camera['recognition_id']
+                                ]);
+                            }
 
-                        if ($timing['18h'] == $camera['video_id']) {
-                            $timing->update([
-                                'approved_18h' => $camera['recognition_id']
-                            ]);
+                            if ($timing['18h'] == $camera['video_id']) {
+                                $timing->update([
+                                    'approved_18h' => $camera['recognition_id']
+                                ]);
+                            }
                         }
-                    });
+                    }
+
 
                     if ($request->params['type'] == '1') {
                         Camera::where('cam_numeric_id', $camera['id'])->update([

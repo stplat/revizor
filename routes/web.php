@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
+    // $app = app(\App\Models\UikTiming::class);
+    // foreach ($app->get() as $value) {
+    //     dd($value);
+    // }
+
+    // dd($app->get()->each(function ($item) {
+    //     dd($item);
+    // }));
     // $box = collect([]);
     // $box->put('type', 'asd');
     // $box->put('asd', 'asd');
